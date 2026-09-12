@@ -1,6 +1,24 @@
 (() => {
   "use strict";
 
+  document.documentElement.classList.remove("no-js");
+
+  /* ---------------- progressive image loading (LQIP blur-up) ---------------- */
+  const progressiveImgs = document.querySelectorAll(".progressive-img");
+  progressiveImgs.forEach((img) => {
+    const markLoaded = () => img.classList.add("is-loaded");
+    if (img.complete && img.naturalWidth > 0) {
+      markLoaded();
+    } else {
+      img.addEventListener("load", markLoaded, { once: true });
+      img.addEventListener("error", markLoaded, { once: true });
+    }
+  });
+  // safety net: catch any image whose load event raced with the listener above
+  window.addEventListener("load", () => {
+    progressiveImgs.forEach((img) => img.classList.add("is-loaded"));
+  });
+
   const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   const finePointer = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
   const gsapReady = window.gsap && window.ScrollTrigger;
