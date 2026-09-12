@@ -1,6 +1,11 @@
 (() => {
   "use strict";
 
+  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const finePointer = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+  const gsapReady = window.gsap && window.ScrollTrigger;
+  if (gsapReady) gsap.registerPlugin(ScrollTrigger);
+
   /* ---------------- sticky header ---------------- */
   const header = document.querySelector(".site-header");
   const onScroll = () => {
@@ -31,9 +36,44 @@
     });
   }
 
-  /* ---------------- scroll reveal ---------------- */
-  const revealEls = document.querySelectorAll("[data-reveal]");
-  if ("IntersectionObserver" in window && revealEls.length) {
+  /* ---------------- word/char split for headline stagger ---------------- */
+  document.querySelectorAll("[data-split]").forEach((el) => {
+    const words = el.textContent.trim().split(/\s+/);
+    el.innerHTML = words
+      .map((w) => `<span class="split-word"><span class="split-inner">${w}</span></span>`)
+      .join(" ");
+  });
+
+  /* ---------------- scroll reveal (GSAP if available, CSS fallback otherwise) ---------------- */
+  const revealEls = Array.from(document.querySelectorAll("[data-reveal]"));
+  if (gsapReady && !reduceMotion) {
+    revealEls.forEach((el, i) => {
+      const isSplit = el.matches("[data-split]");
+      gsap.set(el, { autoAlpha: 1 });
+      if (isSplit) {
+        gsap.from(el.querySelectorAll(".split-inner"), {
+          yPercent: 130,
+          rotate: 6,
+          opacity: 0,
+          duration: 0.9,
+          ease: "power4.out",
+          stagger: 0.06,
+          scrollTrigger: { trigger: el, start: "top 88%", once: true },
+        });
+      } else {
+        gsap.from(el, {
+          y: 34,
+          opacity: 0,
+          rotateX: -8,
+          transformPerspective: 700,
+          duration: 0.85,
+          delay: (i % 6) * 0.05,
+          ease: "power3.out",
+          scrollTrigger: { trigger: el, start: "top 90%", once: true },
+        });
+      }
+    });
+  } else if ("IntersectionObserver" in window && revealEls.length) {
     const io = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -51,6 +91,21 @@
     });
   } else {
     revealEls.forEach((el) => el.classList.add("is-visible"));
+  }
+
+  /* ---------------- hero / media parallax depth ---------------- */
+  if (gsapReady && !reduceMotion) {
+    document.querySelectorAll("[data-parallax]").forEach((img) => {
+      gsap.fromTo(
+        img,
+        { yPercent: -8 },
+        {
+          yPercent: 10,
+          ease: "none",
+          scrollTrigger: { trigger: img.closest("[data-parallax-wrap]") || img.parentElement, start: "top bottom", end: "bottom top", scrub: 0.6 },
+        }
+      );
+    });
   }
 
   /* ---------------- animated counters ---------------- */
@@ -79,6 +134,78 @@
       });
     }, { threshold: 0.6 });
     counters.forEach((c) => cio.observe(c));
+  }
+
+  /* ---------------- 3D pointer tilt ---------------- */
+  if (finePointer && !reduceMotion) {
+    document.querySelectorAll(".tilt").forEach((card) => {
+      const strength = parseFloat(card.getAttribute("data-tilt-strength") || "10");
+      let raf = null;
+      const onMove = (e) => {
+        const r = card.getBoundingClientRect();
+        const px = (e.clientX - r.left) / r.width - 0.5;
+        const py = (e.clientY - r.top) / r.height - 0.5;
+        if (raf) cancelAnimationFrame(raf);
+        raf = requestAnimationFrame(() => {
+          card.style.transform = `perspective(900px) rotateX(${(-py * strength).toFixed(2)}deg) rotateY(${(px * strength).toFixed(2)}deg) translateZ(0)`;
+          card.style.setProperty("--glare-x", `${(px + 0.5) * 100}%`);
+          card.style.setProperty("--glare-y", `${(py + 0.5) * 100}%`);
+        });
+      };
+      const reset = () => {
+        if (raf) cancelAnimationFrame(raf);
+        card.style.transform = "";
+      };
+      card.addEventListener("pointermove", onMove);
+      card.addEventListener("pointerleave", reset);
+    });
+  }
+
+  /* ---------------- magnetic buttons ---------------- */
+  if (finePointer && !reduceMotion) {
+    document.querySelectorAll(".magnetic").forEach((btn) => {
+      const pull = 0.35;
+      const onMove = (e) => {
+        const r = btn.getBoundingClientRect();
+        const mx = e.clientX - (r.left + r.width / 2);
+        const my = e.clientY - (r.top + r.height / 2);
+        btn.style.transform = `translate(${mx * pull}px, ${my * pull}px)`;
+      };
+      const reset = () => { btn.style.transform = ""; };
+      btn.addEventListener("pointermove", onMove);
+      btn.addEventListener("pointerleave", reset);
+    });
+  }
+
+  /* ---------------- cursor-follow glow on dark sections ---------------- */
+  if (finePointer && !reduceMotion) {
+    document.querySelectorAll(".glow-surface").forEach((section) => {
+      const onMove = (e) => {
+        const r = section.getBoundingClientRect();
+        section.style.setProperty("--gx", `${((e.clientX - r.left) / r.width) * 100}%`);
+        section.style.setProperty("--gy", `${((e.clientY - r.top) / r.height) * 100}%`);
+      };
+      section.addEventListener("pointermove", onMove);
+    });
+  }
+
+  /* ---------------- custom cursor dot ---------------- */
+  if (finePointer && !reduceMotion) {
+    const dot = document.createElement("div");
+    dot.className = "cursor-dot";
+    document.body.appendChild(dot);
+    let dx = window.innerWidth / 2, dy = window.innerHeight / 2, tx = dx, ty = dy;
+    window.addEventListener("pointermove", (e) => { tx = e.clientX; ty = e.clientY; dot.classList.add("is-active"); });
+    const hoverables = "a, button, .tilt, input, select, textarea";
+    document.addEventListener("pointerover", (e) => { if (e.target.closest(hoverables)) dot.classList.add("is-big"); });
+    document.addEventListener("pointerout", (e) => { if (e.target.closest(hoverables)) dot.classList.remove("is-big"); });
+    const loop = () => {
+      dx += (tx - dx) * 0.18;
+      dy += (ty - dy) * 0.18;
+      dot.style.transform = `translate(${dx}px, ${dy}px)`;
+      requestAnimationFrame(loop);
+    };
+    requestAnimationFrame(loop);
   }
 
   /* ---------------- lightbox ---------------- */

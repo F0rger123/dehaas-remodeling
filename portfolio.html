@@ -45,11 +45,11 @@
 
 <main id="main">
 
-  <section class="page-hero">
+  <section class="page-hero glow-surface grain">
     <div class="container">
       <p class="breadcrumb"><a href="index.html">Home</a> / Portfolio</p>
       <p class="eyebrow" style="color:#ffb2ac">Portfolio</p>
-      <h1>Real jobs, from the ground up.</h1>
+      <h1 data-split data-reveal>Real jobs, from the ground up.</h1>
       <p>A look at recent work across York and Adams Counties &mdash; interiors, siding and window installs, decks, and roofing. Tap any photo for a closer look.</p>
     </div>
   </section>
@@ -58,42 +58,42 @@
     <div class="container">
       <div class="portfolio-grid" data-reveal-group>
 
-        <figure class="pf-item wide tall" data-reveal data-lightbox data-full="assets/img/exterior-addition.jpg" data-caption="Full exterior renovation — new siding, brick accent and window addition">
+        <figure class="pf-item wide tall tilt tilt-glare" data-reveal data-lightbox data-full="assets/img/exterior-addition.jpg" data-caption="Full exterior renovation — new siding, brick accent and window addition">
           <img src="assets/img/exterior-addition.jpg" alt="Home exterior renovation with new siding, brick and windows" loading="lazy" />
           <figcaption class="pf-cap">Exterior Renovation<small>Siding, brick accent &amp; window addition</small></figcaption>
         </figure>
 
-        <figure class="pf-item narrow tall" data-reveal data-lightbox data-full="assets/img/door-install.jpg" data-caption="New French door and siding install, mid-project">
+        <figure class="pf-item narrow tall tilt tilt-glare" data-reveal data-lightbox data-full="assets/img/door-install.jpg" data-caption="New French door and siding install, mid-project">
           <img src="assets/img/door-install.jpg" alt="New exterior French door installation in progress" loading="lazy" />
           <figcaption class="pf-cap">Door &amp; Siding<small>Mid-project</small></figcaption>
         </figure>
 
-        <figure class="pf-item" data-reveal data-lightbox data-full="assets/img/roof-standing-seam.jpg" data-caption="New standing seam metal roof">
+        <figure class="pf-item tilt tilt-glare" data-reveal data-lightbox data-full="assets/img/roof-standing-seam.jpg" data-caption="New standing seam metal roof">
           <img src="assets/img/roof-standing-seam.jpg" alt="Standing seam metal roof installation" loading="lazy" />
           <figcaption class="pf-cap">Metal Roofing<small>Standing seam install</small></figcaption>
         </figure>
 
-        <figure class="pf-item" data-reveal data-lightbox data-full="assets/img/roof-shingle-repair.jpg" data-caption="Shingle roof repair">
+        <figure class="pf-item tilt tilt-glare" data-reveal data-lightbox data-full="assets/img/roof-shingle-repair.jpg" data-caption="Shingle roof repair">
           <img src="assets/img/roof-shingle-repair.jpg" alt="Asphalt shingle roof repair" loading="lazy" />
           <figcaption class="pf-cap">Roof Repair<small>Storm damage assessment</small></figcaption>
         </figure>
 
-        <figure class="pf-item wide" data-reveal data-lightbox data-full="assets/img/deck-build.jpg" data-caption="Custom deck build, framing and rail complete">
+        <figure class="pf-item wide tilt tilt-glare" data-reveal data-lightbox data-full="assets/img/deck-build.jpg" data-caption="Custom deck build, framing and rail complete">
           <img src="assets/img/deck-build.jpg" alt="New wood deck under construction" loading="lazy" />
           <figcaption class="pf-cap">Custom Deck<small>Framing &amp; railings</small></figcaption>
         </figure>
 
-        <figure class="pf-item narrow tall" data-reveal data-lightbox data-full="assets/img/interior-builtins.jpg" data-caption="Custom built-in shelving and finish carpentry">
+        <figure class="pf-item narrow tall tilt tilt-glare" data-reveal data-lightbox data-full="assets/img/interior-builtins.jpg" data-caption="Custom built-in shelving and finish carpentry">
           <img src="assets/img/interior-builtins.jpg" alt="Custom built-in shelving in a finished room" loading="lazy" />
           <figcaption class="pf-cap">Custom Built-Ins<small>Finish carpentry</small></figcaption>
         </figure>
 
-        <figure class="pf-item wide" data-reveal data-lightbox data-full="assets/img/interior-basement.jpg" data-caption="Finished interior with shiplap walls and wood ceiling">
+        <figure class="pf-item wide tilt tilt-glare" data-reveal data-lightbox data-full="assets/img/interior-basement.jpg" data-caption="Finished interior with shiplap walls and wood ceiling">
           <img src="assets/img/interior-basement.jpg" alt="Finished interior room with shiplap walls and wood ceiling" loading="lazy" />
           <figcaption class="pf-cap">Interior Finish<small>Shiplap &amp; wood ceiling</small></figcaption>
         </figure>
 
-        <figure class="pf-item" data-reveal data-lightbox data-full="assets/img/hero-demo.jpg" data-caption="On-site concrete demolition, owner-operated">
+        <figure class="pf-item tilt tilt-glare" data-reveal data-lightbox data-full="assets/img/hero-demo.jpg" data-caption="On-site concrete demolition, owner-operated">
           <img src="assets/img/hero-demo.jpg" alt="Concrete demolition with a jackhammer on a job site" loading="lazy" />
           <figcaption class="pf-cap">Site Work<small>Owner on the tools</small></figcaption>
         </figure>
@@ -104,7 +104,7 @@
 
   <section class="section-navy-100">
     <div class="container">
-      <div class="cta-band" data-reveal>
+      <div class="cta-band glow-surface" data-reveal>
         <p class="eyebrow" style="color:#ffb2ac">Like What You See?</p>
         <h2>Your project could be next.</h2>
         <p>Request a free estimate and let's talk through what you're planning.</p>
@@ -169,6 +169,8 @@
 </footer>
 
 <script>document.getElementById("year").textContent = new Date().getFullYear();</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 <script src="assets/js/main.js"></script>
 </body>
 </html>

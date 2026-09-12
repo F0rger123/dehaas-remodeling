@@ -45,19 +45,19 @@
 
 <main id="main">
 
-  <section class="page-hero">
+  <section class="page-hero glow-surface grain">
     <div class="container">
       <p class="breadcrumb"><a href="index.html">Home</a> / About</p>
       <p class="eyebrow" style="color:#ffb2ac">Our Story</p>
-      <h1>A local crew built on one gap in the market: honest estimates.</h1>
+      <h1 data-split data-reveal>A local crew built on one gap in the market: honest estimates.</h1>
       <p>Founded in 2017 by Joshua DeHaas, DeHaas Building and Remodeling Co. exists to give South Central Pennsylvania homeowners quality craftsmanship without the inflated pricing.</p>
     </div>
   </section>
 
   <section>
     <div class="container split">
-      <div class="split-media" data-reveal>
-        <img src="assets/img/hero-demo.jpg" alt="Joshua DeHaas operating a jackhammer on a concrete demolition job" width="1920" height="2560" />
+      <div class="split-media" data-reveal data-parallax-wrap>
+        <img src="assets/img/hero-demo.jpg" alt="Joshua DeHaas operating a jackhammer on a concrete demolition job" width="1920" height="2560"  data-parallax/>
         <div class="badge">
           <span class="badge-num">2017</span>
           <span class="badge-txt">Founded in South Central Pennsylvania</span>
@@ -80,17 +80,17 @@
         <p style="margin-inline:auto">Three words, applied the same way whether the job is a five-figure remodel or a single afternoon repair.</p>
       </div>
       <div class="values-grid" data-reveal-group>
-        <div class="value-card" data-reveal>
+        <div class="value-card tilt tilt-glare" data-reveal>
           <span class="value-num">01 &mdash; Quality</span>
           <h3>Equivalent craftsmanship, every project size</h3>
           <p>The standard doesn't move for a smaller job. Every project gets the same attention to detail.</p>
         </div>
-        <div class="value-card" data-reveal>
+        <div class="value-card tilt tilt-glare" data-reveal>
           <span class="value-num">02 &mdash; Honesty</span>
           <h3>Straight talk, even about the hard parts</h3>
           <p>When something isn't in our wheelhouse or a plan needs to change, you hear about it directly &mdash; not after the fact.</p>
         </div>
-        <div class="value-card" data-reveal>
+        <div class="value-card tilt tilt-glare" data-reveal>
           <span class="value-num">03 &mdash; Integrity</span>
           <h3>Transparent pricing, no unnecessary upsells</h3>
           <p>Materials carry a 10% markup that's refunded if unused. No pressure to buy more than the job needs.</p>
@@ -101,8 +101,8 @@
 
   <section>
     <div class="container split reverse">
-      <div class="split-media" data-reveal>
-        <img src="assets/img/interior-builtins.jpg" alt="Custom built-in shelving and finish carpentry" width="1600" height="2133" loading="lazy" />
+      <div class="split-media" data-reveal data-parallax-wrap>
+        <img src="assets/img/interior-builtins.jpg" alt="Custom built-in shelving and finish carpentry" width="1600" height="2133" loading="lazy"  data-parallax/>
       </div>
       <div>
         <p class="eyebrow" data-reveal>Where We Specialize</p>
@@ -119,7 +119,7 @@
 
   <section class="section-navy-100">
     <div class="container">
-      <div class="cta-band" data-reveal>
+      <div class="cta-band glow-surface" data-reveal>
         <p class="eyebrow" style="color:#ffb2ac">Work With Joshua's Crew</p>
         <h2>Tell us what you're planning.</h2>
         <p>Serving homeowners across York and Adams Counties with the same three principles on every job.</p>
@@ -176,6 +176,8 @@
 </footer>
 
 <script>document.getElementById("year").textContent = new Date().getFullYear();</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 <script src="assets/js/main.js"></script>
 </body>
 </html>
