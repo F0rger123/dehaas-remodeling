@@ -39,8 +39,6 @@
 
   const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   const finePointer = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
-  const gsapReady = window.gsap && window.ScrollTrigger;
-  if (gsapReady) gsap.registerPlugin(ScrollTrigger);
 
   /* ---------------- sticky header ---------------- */
   const header = document.querySelector(".site-header");
@@ -100,21 +98,6 @@
     revealEls.forEach((el) => el.classList.add("is-visible"));
   }
 
-  /* ---------------- hero / media parallax depth ---------------- */
-  if (gsapReady && !reduceMotion) {
-    document.querySelectorAll("[data-parallax]").forEach((img) => {
-      gsap.fromTo(
-        img,
-        { yPercent: -8 },
-        {
-          yPercent: 10,
-          ease: "none",
-          scrollTrigger: { trigger: img.closest("[data-parallax-wrap]") || img.parentElement, start: "top bottom", end: "bottom top", scrub: 0.6 },
-        }
-      );
-    });
-  }
-
   /* ---------------- animated counters ---------------- */
   const counters = document.querySelectorAll("[data-count-to]");
   if ("IntersectionObserver" in window && counters.length) {
@@ -141,22 +124,6 @@
       });
     }, { threshold: 0.6 });
     counters.forEach((c) => cio.observe(c));
-  }
-
-  /* ---------------- magnetic buttons ---------------- */
-  if (finePointer && !reduceMotion) {
-    document.querySelectorAll(".magnetic").forEach((btn) => {
-      const pull = 0.35;
-      const onMove = (e) => {
-        const r = btn.getBoundingClientRect();
-        const mx = e.clientX - (r.left + r.width / 2);
-        const my = e.clientY - (r.top + r.height / 2);
-        btn.style.transform = `translate(${mx * pull}px, ${my * pull}px)`;
-      };
-      const reset = () => { btn.style.transform = ""; };
-      btn.addEventListener("pointermove", onMove);
-      btn.addEventListener("pointerleave", reset);
-    });
   }
 
   /* ---------------- cursor-follow glow on dark sections ---------------- */

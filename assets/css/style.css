@@ -1005,10 +1005,6 @@ footer.site-footer {
   background-size: 180px 180px;
 }
 
-/* ------------------------------------- magnetic -------------------------------------- */
-
-.magnetic { transition: transform 260ms var(--ease-spring); }
-
 /* ---------------------------------- cursor-follow glow -------------------------------- */
 
 .glow-surface { position: relative; }
