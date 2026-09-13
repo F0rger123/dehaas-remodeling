@@ -54,44 +54,9 @@
     });
   }
 
-  /* ---------------- word/char split for headline stagger ---------------- */
-  document.querySelectorAll("[data-split]").forEach((el) => {
-    const words = el.textContent.trim().split(/\s+/);
-    el.innerHTML = words
-      .map((w) => `<span class="split-word"><span class="split-inner">${w}</span></span>`)
-      .join(" ");
-  });
-
-  /* ---------------- scroll reveal (GSAP if available, CSS fallback otherwise) ---------------- */
+  /* ---------------- scroll reveal: a plain, quiet fade + rise ---------------- */
   const revealEls = Array.from(document.querySelectorAll("[data-reveal]"));
-  if (gsapReady && !reduceMotion) {
-    revealEls.forEach((el, i) => {
-      const isSplit = el.matches("[data-split]");
-      gsap.set(el, { autoAlpha: 1 });
-      if (isSplit) {
-        gsap.from(el.querySelectorAll(".split-inner"), {
-          yPercent: 130,
-          rotate: 6,
-          opacity: 0,
-          duration: 0.9,
-          ease: "power4.out",
-          stagger: 0.06,
-          scrollTrigger: { trigger: el, start: "top 88%", once: true },
-        });
-      } else {
-        gsap.from(el, {
-          y: 34,
-          opacity: 0,
-          rotateX: -8,
-          transformPerspective: 700,
-          duration: 0.85,
-          delay: (i % 6) * 0.05,
-          ease: "power3.out",
-          scrollTrigger: { trigger: el, start: "top 90%", once: true },
-        });
-      }
-    });
-  } else if ("IntersectionObserver" in window && revealEls.length) {
+  if ("IntersectionObserver" in window && revealEls.length) {
     const io = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -154,31 +119,6 @@
     counters.forEach((c) => cio.observe(c));
   }
 
-  /* ---------------- 3D pointer tilt ---------------- */
-  if (finePointer && !reduceMotion) {
-    document.querySelectorAll(".tilt").forEach((card) => {
-      const strength = parseFloat(card.getAttribute("data-tilt-strength") || "10");
-      let raf = null;
-      const onMove = (e) => {
-        const r = card.getBoundingClientRect();
-        const px = (e.clientX - r.left) / r.width - 0.5;
-        const py = (e.clientY - r.top) / r.height - 0.5;
-        if (raf) cancelAnimationFrame(raf);
-        raf = requestAnimationFrame(() => {
-          card.style.transform = `perspective(900px) rotateX(${(-py * strength).toFixed(2)}deg) rotateY(${(px * strength).toFixed(2)}deg) translateZ(0)`;
-          card.style.setProperty("--glare-x", `${(px + 0.5) * 100}%`);
-          card.style.setProperty("--glare-y", `${(py + 0.5) * 100}%`);
-        });
-      };
-      const reset = () => {
-        if (raf) cancelAnimationFrame(raf);
-        card.style.transform = "";
-      };
-      card.addEventListener("pointermove", onMove);
-      card.addEventListener("pointerleave", reset);
-    });
-  }
-
   /* ---------------- magnetic buttons ---------------- */
   if (finePointer && !reduceMotion) {
     document.querySelectorAll(".magnetic").forEach((btn) => {
@@ -214,7 +154,7 @@
     document.body.appendChild(dot);
     let dx = window.innerWidth / 2, dy = window.innerHeight / 2, tx = dx, ty = dy;
     window.addEventListener("pointermove", (e) => { tx = e.clientX; ty = e.clientY; dot.classList.add("is-active"); });
-    const hoverables = "a, button, .tilt, input, select, textarea";
+    const hoverables = "a, button, input, select, textarea";
     document.addEventListener("pointerover", (e) => { if (e.target.closest(hoverables)) dot.classList.add("is-big"); });
     document.addEventListener("pointerout", (e) => { if (e.target.closest(hoverables)) dot.classList.remove("is-big"); });
     const loop = () => {

@@ -117,7 +117,7 @@ h1, h2, h3, h4 {
   color: var(--navy-900);
 }
 
-h1 { font-size: clamp(2.6rem, 7.2vw, 5.6rem); font-weight: 560; text-wrap: balance; }
+h1 { font-size: clamp(2.15rem, 4.4vw, 3.6rem); font-weight: 540; line-height: 1.15; text-wrap: balance; }
 h2 { font-size: clamp(1.9rem, 3.6vw, 2.9rem); }
 h3 { font-size: clamp(1.25rem, 2vw, 1.5rem); }
 
@@ -420,8 +420,7 @@ body.menu-open { overflow: hidden; }
   padding-block: clamp(6.5rem, 14vh, 9rem) clamp(3rem, 7vh, 4.5rem);
 }
 .hero .eyebrow { color: #ffb2ac; }
-.hero h1 { color: var(--white); max-width: 16ch; }
-.hero h1 .split-inner { display: inline-block; }
+.hero h1 { color: var(--white); max-width: 18ch; }
 .hero-lede { color: rgba(255,255,255,0.86); font-size: 1.15rem; max-width: 46ch; }
 .hero-actions { display: flex; flex-wrap: wrap; gap: 1rem; margin-top: 2rem; }
 
@@ -495,11 +494,11 @@ section { position: relative; padding-block: clamp(4.5rem, 9vh, 7.5rem); }
 
 [data-reveal] {
   opacity: 0;
-  transform: translateY(28px);
-  transition: opacity 900ms var(--ease-out), transform 900ms var(--ease-out);
+  transform: translateY(16px);
+  transition: opacity 550ms var(--ease-out), transform 550ms var(--ease-out);
 }
 [data-reveal].is-visible { opacity: 1; transform: translateY(0); }
-[data-reveal-group] > * { transition-delay: calc(var(--i, 0) * 90ms); }
+[data-reveal-group] > * { transition-delay: calc(var(--i, 0) * 60ms); }
 
 /* ------------------------------- values grid ------------------------------ */
 
@@ -706,12 +705,16 @@ section { position: relative; padding-block: clamp(4.5rem, 9vh, 7.5rem); }
 .split.reverse .split-media { order: 2; }
 .split-media {
   position: relative;
+  aspect-ratio: 4/5;
+}
+.split-media picture {
+  display: block;
+  width: 100%;
+  height: 100%;
   border-radius: var(--radius-lg);
   overflow: hidden;
-  aspect-ratio: 4/5;
   box-shadow: var(--shadow-lg);
 }
-.split-media picture { display: block; width: 100%; height: 100%; }
 .split-media img {
   width: 100%;
   height: 100%;
@@ -999,31 +1002,6 @@ footer.site-footer {
   background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='120'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
   background-size: 180px 180px;
 }
-
-/* ------------------------------- split-text stagger reveal ------------------------------- */
-
-[data-split] .split-word { display: inline-block; overflow: hidden; vertical-align: top; }
-[data-split] .split-inner { display: inline-block; will-change: transform; }
-
-/* ------------------------------------ 3D tilt + glare ------------------------------------ */
-
-.tilt {
-  transition: transform 420ms var(--ease-out);
-  will-change: transform;
-}
-.tilt.tilt-glare { position: relative; overflow: hidden; }
-.tilt.tilt-glare::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: 3;
-  pointer-events: none;
-  opacity: 0;
-  transition: opacity 220ms var(--ease-out);
-  background: radial-gradient(220px circle at var(--glare-x, 50%) var(--glare-y, 50%), rgba(255,255,255,0.35), transparent 60%);
-  mix-blend-mode: overlay;
-}
-.tilt.tilt-glare:hover::before { opacity: 1; }
 
 /* ------------------------------------- magnetic -------------------------------------- */
 
