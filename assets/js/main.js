@@ -3,6 +3,24 @@
 
   document.documentElement.classList.remove("no-js");
 
+  /* ---------------- always land at the top of a fresh page ----------------
+     Mobile browsers (especially iOS Safari's back-forward cache) sometimes
+     restore the previous scroll position instead of starting at the top,
+     which reads as "the link took me to the bottom of the page". Force top
+     on normal loads and on any bfcache restore, but respect an intentional
+     #anchor link (e.g. the footer's services.html#interior). */
+  if ("scrollRestoration" in history) history.scrollRestoration = "manual";
+  const jumpToTop = () => {
+    const prevBehavior = document.documentElement.style.scrollBehavior;
+    document.documentElement.style.scrollBehavior = "auto";
+    window.scrollTo(0, 0);
+    document.documentElement.style.scrollBehavior = prevBehavior;
+  };
+  if (!window.location.hash) jumpToTop();
+  window.addEventListener("pageshow", (e) => {
+    if (e.persisted && !window.location.hash) jumpToTop();
+  });
+
   /* ---------------- progressive image loading (LQIP blur-up) ---------------- */
   const progressiveImgs = document.querySelectorAll(".progressive-img");
   progressiveImgs.forEach((img) => {
@@ -72,6 +90,12 @@
       el.style.setProperty("--i", i % 8);
       io.observe(el);
     });
+    // safety net: a fast flick-scroll (common on mobile) can in rare cases move
+    // past an element between intersection checks without ever registering it
+    // as intersecting. Never leave real content permanently invisible.
+    setTimeout(() => {
+      revealEls.forEach((el) => el.classList.add("is-visible"));
+    }, 2500);
   } else {
     revealEls.forEach((el) => el.classList.add("is-visible"));
   }
