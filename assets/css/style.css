@@ -1025,27 +1025,6 @@ footer.site-footer {
 .glow-surface:hover::before { opacity: 1; }
 .glow-surface > * { position: relative; z-index: 1; }
 
-/* -------------------------------------- custom cursor ------------------------------------- */
-
-.cursor-dot {
-  position: fixed;
-  top: 0; left: 0;
-  width: 10px; height: 10px;
-  margin: -5px 0 0 -5px;
-  border-radius: 50%;
-  background: var(--red-600);
-  pointer-events: none;
-  z-index: 400;
-  opacity: 0;
-  transition: opacity 200ms var(--ease-out), width 220ms var(--ease-spring), height 220ms var(--ease-spring), margin 220ms var(--ease-spring), background 220ms var(--ease-out);
-}
-.cursor-dot.is-active { opacity: 1; }
-.cursor-dot.is-big {
-  width: 40px; height: 40px; margin: -20px 0 0 -20px;
-  background: rgba(194,43,38,0.18);
-  border: 1.5px solid var(--red-600);
-}
-
 /* ----------------------------------------- marquee ---------------------------------------- */
 
 .marquee-band {
@@ -1085,8 +1064,4 @@ footer.site-footer {
 }
 @media (prefers-reduced-motion: reduce) {
   .marquee-track { animation: none; }
-}
-
-@media (hover: none) {
-  .cursor-dot { display: none; }
 }

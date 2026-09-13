@@ -171,25 +171,6 @@
     });
   }
 
-  /* ---------------- custom cursor dot ---------------- */
-  if (finePointer && !reduceMotion) {
-    const dot = document.createElement("div");
-    dot.className = "cursor-dot";
-    document.body.appendChild(dot);
-    let dx = window.innerWidth / 2, dy = window.innerHeight / 2, tx = dx, ty = dy;
-    window.addEventListener("pointermove", (e) => { tx = e.clientX; ty = e.clientY; dot.classList.add("is-active"); });
-    const hoverables = "a, button, input, select, textarea";
-    document.addEventListener("pointerover", (e) => { if (e.target.closest(hoverables)) dot.classList.add("is-big"); });
-    document.addEventListener("pointerout", (e) => { if (e.target.closest(hoverables)) dot.classList.remove("is-big"); });
-    const loop = () => {
-      dx += (tx - dx) * 0.18;
-      dy += (ty - dy) * 0.18;
-      dot.style.transform = `translate(${dx}px, ${dy}px)`;
-      requestAnimationFrame(loop);
-    };
-    requestAnimationFrame(loop);
-  }
-
   /* ---------------- lightbox ---------------- */
   const lightbox = document.querySelector(".lightbox");
   if (lightbox) {
