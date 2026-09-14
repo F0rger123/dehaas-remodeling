@@ -59,7 +59,7 @@
 *, *::before, *::after { box-sizing: border-box; }
 /* keep anchor jumps and mobile "scroll input into view" from landing content
    underneath the fixed header */
-html { scroll-behavior: smooth; scroll-padding-top: 96px; }
+html { scroll-behavior: smooth; scroll-padding-top: 96px; background: var(--paper); }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   *, *::before, *::after {
@@ -83,15 +83,6 @@ body {
   font-kerning: normal;
   font-synthesis: none;
   overflow-x: hidden;
-  opacity: 0;
-  animation: page-in 480ms var(--ease-out) 60ms forwards;
-}
-@keyframes page-in {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
-@media (prefers-reduced-motion: reduce) {
-  body { opacity: 1; animation: none; }
 }
 
 :focus-visible {
