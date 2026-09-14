@@ -2,6 +2,24 @@
 <html lang="en" class="no-js">
 <head>
 <meta charset="UTF-8" />
+<script>
+/* Set this as early as possible — before the browser gets a chance to run
+   its own automatic scroll restoration — otherwise a race lets it win and
+   the page can land scrolled to wherever a same-URL history entry left off. */
+(function () {
+  if ("scrollRestoration" in history) history.scrollRestoration = "manual";
+  var jumpToTop = function () {
+    var prevBehavior = document.documentElement.style.scrollBehavior;
+    document.documentElement.style.scrollBehavior = "auto";
+    window.scrollTo(0, 0);
+    document.documentElement.style.scrollBehavior = prevBehavior;
+  };
+  if (!location.hash) jumpToTop();
+  window.addEventListener("pageshow", function (e) {
+    if (e.persisted && !location.hash) jumpToTop();
+  });
+})();
+</script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>DeHaas Building and Remodeling Co. | York &amp; Adams County, PA</title>
 <meta name="description" content="Quality, honesty and integrity on every job. DeHaas Building and Remodeling Co. handles kitchen, bath, basement and whole-home remodeling plus siding, decks, roofing, windows and doors across York and Adams Counties, PA. PA License #PA214704." />

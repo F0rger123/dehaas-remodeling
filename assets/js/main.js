@@ -3,23 +3,9 @@
 
   document.documentElement.classList.remove("no-js");
 
-  /* ---------------- always land at the top of a fresh page ----------------
-     Mobile browsers (especially iOS Safari's back-forward cache) sometimes
-     restore the previous scroll position instead of starting at the top,
-     which reads as "the link took me to the bottom of the page". Force top
-     on normal loads and on any bfcache restore, but respect an intentional
-     #anchor link (e.g. the footer's services.html#interior). */
-  if ("scrollRestoration" in history) history.scrollRestoration = "manual";
-  const jumpToTop = () => {
-    const prevBehavior = document.documentElement.style.scrollBehavior;
-    document.documentElement.style.scrollBehavior = "auto";
-    window.scrollTo(0, 0);
-    document.documentElement.style.scrollBehavior = prevBehavior;
-  };
-  if (!window.location.hash) jumpToTop();
-  window.addEventListener("pageshow", (e) => {
-    if (e.persisted && !window.location.hash) jumpToTop();
-  });
+  /* scroll-to-top-on-load handling now lives in a head inline script (see
+     each page's <head>) so it runs before the browser's own automatic
+     scroll restoration has a chance to win the race. */
 
   /* ---------------- progressive image loading (LQIP blur-up) ---------------- */
   const progressiveImgs = document.querySelectorAll(".progressive-img");
