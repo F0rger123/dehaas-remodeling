@@ -965,6 +965,7 @@ footer.site-footer {
 /* ------------------------------ progressive image loading -------------------------- */
 
 .img-frame {
+  background-color: var(--paper-dim);
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
