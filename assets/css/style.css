@@ -241,8 +241,11 @@ p { margin: 0 0 1em; color: var(--ink-soft); max-width: 62ch; }
   font-size: 1.15rem;
   color: var(--navy-900);
 }
-.brand img { height: 42px; width: auto; transition: height var(--dur-med) var(--ease-out); }
-.site-header.is-scrolled .brand img { height: 34px; }
+.brand img { height: 48px; width: auto; transition: height var(--dur-med) var(--ease-out); }
+/* stays at this size once the header has shrunk to its sticky/scrolled state */
+.site-header.is-scrolled .brand img { height: 48px; }
+/* on the homepage only, make the logo extra prominent before you've scrolled */
+body.is-home .site-header:not(.is-scrolled) .brand img { height: 76px; }
 .brand-text small {
   display: block;
   font-family: var(--font-body);
