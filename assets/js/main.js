@@ -159,13 +159,23 @@
   }
 
   /* ---------------- faq accordion ---------------- */
-  document.querySelectorAll(".faq-item").forEach((item) => {
+  const faqItems = document.querySelectorAll(".faq-item");
+  const faqDefaults = new Map();
+  faqItems.forEach((item) => {
+    faqDefaults.set(item, item.getAttribute("data-open"));
     const btn = item.querySelector(".faq-q");
     btn?.addEventListener("click", () => {
       const isOpen = item.getAttribute("data-open") === "true";
       item.closest(".faq-list")?.querySelectorAll(".faq-item").forEach((i) => i.setAttribute("data-open", "false"));
       item.setAttribute("data-open", String(!isOpen));
     });
+  });
+  // the back-forward cache restores whatever data-open state was left behind
+  // when navigating away, not the page's original state — put it back.
+  window.addEventListener("pageshow", (e) => {
+    if (e.persisted) {
+      faqItems.forEach((item) => item.setAttribute("data-open", faqDefaults.get(item)));
+    }
   });
 
   /* ---------------- estimate form (static hand-off) ----------------
