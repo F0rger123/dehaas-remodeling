@@ -15,6 +15,15 @@
     document.documentElement.style.scrollBehavior = prevBehavior;
   };
   if (!location.hash) jumpToTop();
+  // some mobile browsers apply their own scroll restoration slightly later
+  // than this script runs (after DOM/asset load), which can silently undo
+  // the jump above — reassert it at a couple of later checkpoints too.
+  document.addEventListener("DOMContentLoaded", function () {
+    if (!location.hash) jumpToTop();
+  });
+  window.addEventListener("load", function () {
+    if (!location.hash) jumpToTop();
+  });
   window.addEventListener("pageshow", function (e) {
     if (e.persisted && !location.hash) jumpToTop();
   });
@@ -73,8 +82,8 @@
     </div>
     <div class="hero-inner container">
       <p class="eyebrow">Quality · Honesty · Integrity</p>
-      <h1 data-reveal>Built the right way, for York &amp; Adams County homes.</h1>
-      <p class="hero-lede" data-reveal>DeHaas Building and Remodeling Co. is a family-run crew led on-site by owner Joshua DeHaas &mdash; <em>18 years</em> of hands-on residential construction, honest pricing, and no unnecessary upsells.</p>
+      <h1 data-reveal>Built the right way &mdash; DeHaas Building and Remodeling Co.</h1>
+      <p class="hero-lede" data-reveal>For <em>18 years</em>, owner Joshua DeHaas has brought honest, hands-on craftsmanship to homeowners across York &amp; Adams Counties, PA. Quality work, fair pricing, never an unnecessary upsell &mdash; see what that looks like on your home.</p>
       <div class="hero-actions" data-reveal>
         <a class="btn btn-primary btn-lg" href="estimate.html">Request a Free Estimate</a>
         <a class="btn btn-on-dark btn-lg" href="portfolio.html">See Our Work</a>

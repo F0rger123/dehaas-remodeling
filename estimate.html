@@ -15,6 +15,15 @@
     document.documentElement.style.scrollBehavior = prevBehavior;
   };
   if (!location.hash) jumpToTop();
+  // some mobile browsers apply their own scroll restoration slightly later
+  // than this script runs (after DOM/asset load), which can silently undo
+  // the jump above — reassert it at a couple of later checkpoints too.
+  document.addEventListener("DOMContentLoaded", function () {
+    if (!location.hash) jumpToTop();
+  });
+  window.addEventListener("load", function () {
+    if (!location.hash) jumpToTop();
+  });
   window.addEventListener("pageshow", function (e) {
     if (e.persisted && !location.hash) jumpToTop();
   });
