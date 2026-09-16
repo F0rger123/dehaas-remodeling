@@ -418,6 +418,13 @@ body.menu-open { overflow: hidden; }
 .hero .eyebrow { color: #ffb2ac; }
 .hero h1 { color: var(--white); max-width: 18ch; }
 .hero-lede { color: rgba(255,255,255,0.86); font-size: 1.15rem; max-width: 46ch; }
+/* the dark-red emphasis color has too little contrast against a photo
+   background — give it a white chip so it stays legible everywhere */
+.hero-lede em {
+  background: var(--white);
+  padding: 0.05em 0.45em;
+  border-radius: 4px;
+}
 .hero-actions { display: flex; flex-wrap: wrap; gap: 1rem; margin-top: 2rem; }
 
 .hero-stats-bar {
