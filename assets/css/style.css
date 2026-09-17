@@ -59,7 +59,9 @@
 *, *::before, *::after { box-sizing: border-box; }
 /* keep anchor jumps and mobile "scroll input into view" from landing content
    underneath the fixed header */
-html { scroll-behavior: smooth; scroll-padding-top: 96px; background: var(--paper); }
+/* base size bumped ~6% (16px -> 17px) for easier reading — scales every
+   rem-based measurement on the site along with it */
+html { scroll-behavior: smooth; scroll-padding-top: 96px; background: var(--paper); font-size: 106.25%; }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   *, *::before, *::after {
@@ -75,7 +77,7 @@ body {
   background: var(--paper);
   color: var(--ink);
   font-family: var(--font-body);
-  font-size: 16px;
+  font-size: 1rem;
   line-height: 1.65;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
