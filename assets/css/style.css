@@ -413,7 +413,7 @@ body.menu-open { overflow: hidden; }
 }
 .hero-inner {
   position: relative;
-  z-index: 1;
+  z-index: 6;
   width: 100%;
   padding-block: clamp(6.5rem, 14vh, 9rem) clamp(3rem, 7vh, 4.5rem);
 }
@@ -426,6 +426,7 @@ body.menu-open { overflow: hidden; }
   background: var(--white);
   padding: 0.05em 0.45em;
   border-radius: 4px;
+  font-weight: 700;
 }
 .hero-actions { display: flex; flex-wrap: wrap; gap: 1rem; margin-top: 2rem; }
 
@@ -1064,4 +1065,288 @@ footer.site-footer {
 }
 @media (prefers-reduced-motion: reduce) {
   .marquee-track { animation: none; }
+}
+
+/* ==========================================================================
+   EnviroShake page — a dedicated, premium "old-money study" aesthetic.
+   Everything here is scoped under body.enviroshake-page so it never leaks
+   into the rest of the site's warm/navy design system.
+   ========================================================================== */
+
+body.enviroshake-page {
+  --es-green-950: #0a1c13;
+  --es-green-900: #0f2718;
+  --es-green-850: #133020;
+  --es-green-800: #17392a;
+  --es-green-700: #204a37;
+  --es-gold: #c9a24e;
+  --es-gold-bright: #e6c878;
+  --es-gold-dim: rgba(201,162,78,0.35);
+  --es-cream: #f4ecd8;
+  --es-cream-dim: #cdc2a6;
+  --es-espresso: #241a12;
+  background: var(--es-green-950);
+  color: var(--es-cream-dim);
+}
+body.enviroshake-page .site-footer {
+  background: var(--es-green-950);
+}
+
+/* header floats transparent-on-photo at the top of the ES hero too */
+body.enviroshake-page .site-header:not(.is-scrolled) .brand { color: var(--es-cream); }
+body.enviroshake-page .site-header:not(.is-scrolled) .nav-links a { color: rgba(244,236,216,0.86); }
+body.enviroshake-page .site-header.is-scrolled::before { background: rgba(15,39,24,0.92); }
+body.enviroshake-page .site-header.is-scrolled .brand,
+body.enviroshake-page .site-header.is-scrolled .nav-links a { color: var(--es-cream); }
+body.enviroshake-page .site-header.is-scrolled .nav-links a[aria-current="page"] { color: var(--es-gold-bright); }
+
+.es-hero {
+  position: relative;
+  min-height: 96svh;
+  display: flex;
+  align-items: flex-end;
+  overflow: hidden;
+  color: var(--es-cream);
+}
+.es-hero > .es-hero-media {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+.es-hero-media picture, .es-hero-media img {
+  width: 100%; height: 100%; display: block; object-fit: cover; object-position: center 40%;
+}
+.es-hero-media::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(180deg, rgba(10,28,19,0.25) 0%, rgba(10,28,19,0.35) 35%, rgba(10,28,19,0.95) 100%),
+    linear-gradient(90deg, rgba(10,28,19,0.7) 0%, rgba(10,28,19,0.15) 60%);
+}
+.es-hero-inner {
+  position: relative;
+  z-index: 2;
+  padding-block: clamp(6rem, 14vh, 9rem) clamp(3.5rem, 8vh, 5rem);
+}
+.es-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  border: 1px solid var(--es-gold-dim);
+  border-radius: 999px;
+  padding: 0.5em 1.1em;
+  font-family: var(--font-body);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--es-gold-bright);
+  background: rgba(201,162,78,0.08);
+  margin-bottom: 1.5rem;
+}
+.es-badge .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--es-gold-bright); flex: none; }
+.es-hero h1 {
+  font-family: var(--font-display);
+  font-weight: 560;
+  font-size: clamp(2.3rem, 5vw, 4rem);
+  line-height: 1.1;
+  color: var(--es-cream);
+  max-width: 20ch;
+  text-wrap: balance;
+}
+.es-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.7rem;
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--es-gold-bright);
+  margin-bottom: 1rem;
+}
+.es-eyebrow::before { content: ""; width: 32px; height: 1px; background: var(--es-gold); }
+.es-hero-lede {
+  font-size: 1.15rem;
+  line-height: 1.7;
+  color: rgba(244,236,216,0.82);
+  max-width: 52ch;
+  margin-top: 1.25rem;
+}
+.es-hero-actions { display: flex; flex-wrap: wrap; gap: 1rem; margin-top: 2.25rem; }
+
+/* buttons: a restrained gold/outline pair, distinct from the rest of the site */
+.es-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6em;
+  padding: 1em 2em;
+  border-radius: 3px;
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 0.98rem;
+  letter-spacing: 0.02em;
+  text-decoration: none;
+  cursor: pointer;
+  transition: transform 220ms var(--ease-out), box-shadow 220ms var(--ease-out), background 220ms var(--ease-out), border-color 220ms var(--ease-out);
+  border: 1px solid transparent;
+}
+.es-btn-primary {
+  background: linear-gradient(180deg, var(--es-gold-bright), var(--es-gold));
+  color: var(--es-green-950);
+  box-shadow: 0 10px 30px -12px rgba(201,162,78,0.55);
+}
+.es-btn-primary:hover { transform: translateY(-2px); box-shadow: 0 16px 36px -14px rgba(201,162,78,0.7); }
+.es-btn-outline {
+  border-color: rgba(244,236,216,0.35);
+  color: var(--es-cream);
+}
+.es-btn-outline:hover { border-color: var(--es-gold-bright); color: var(--es-gold-bright); background: rgba(201,162,78,0.08); }
+
+.es-scroll-cue {
+  position: absolute;
+  right: clamp(1.25rem, 4vw, 3rem);
+  bottom: 2rem;
+  z-index: 2;
+  display: flex; flex-direction: column; align-items: center; gap: 0.6rem;
+  color: rgba(244,236,216,0.6);
+  font-size: 0.7rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  writing-mode: vertical-rl;
+}
+.es-scroll-cue .line { width: 1px; height: 46px; background: rgba(201,162,78,0.5); }
+
+/* section rhythm */
+.es-section { padding-block: clamp(4rem, 9vh, 6.5rem); }
+.es-section-alt { background: var(--es-green-900); }
+.es-section-espresso { background: var(--es-espresso); }
+.es-divider {
+  width: 64px; height: 2px;
+  background: linear-gradient(90deg, var(--es-gold), transparent);
+  margin-bottom: 1.5rem;
+}
+.es-section h2 {
+  font-family: var(--font-display);
+  font-weight: 550;
+  color: var(--es-cream);
+  font-size: clamp(1.8rem, 3.2vw, 2.6rem);
+  max-width: 22ch;
+}
+.es-section p { color: var(--es-cream-dim); max-width: 62ch; }
+.es-lede { font-size: 1.08rem; line-height: 1.75; }
+
+.es-split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(2rem, 5vw, 4.5rem);
+  align-items: center;
+}
+.es-split.reverse .es-split-media { order: 2; }
+.es-split-media { position: relative; }
+.es-frame {
+  position: relative;
+  border-radius: 6px;
+  overflow: hidden;
+  border: 1px solid var(--es-gold-dim);
+  box-shadow: 0 30px 70px -30px rgba(0,0,0,0.6);
+  background: var(--es-espresso);
+}
+.es-frame picture, .es-frame img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.es-frame-cap {
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  padding: 1rem 1.25rem;
+  background: linear-gradient(0deg, rgba(10,20,14,0.85), transparent);
+  color: var(--es-cream);
+  font-size: 0.85rem;
+  letter-spacing: 0.03em;
+}
+
+/* the manufacturer wordmark, presented like a small brass plaque */
+.es-logo-plaque-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.1rem;
+  text-align: center;
+}
+.es-logo-plaque {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2.75rem 3.5rem;
+  background: var(--es-cream);
+  border-radius: 8px;
+  border: 1px solid var(--es-gold-dim);
+  box-shadow: 0 24px 60px -24px rgba(0,0,0,0.6);
+}
+.es-logo-plaque img { display: block; height: 52px; width: auto; }
+.es-logo-caption {
+  font-size: 0.78rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--es-cream-dim);
+  max-width: none;
+  margin: 0;
+}
+
+.es-benefits-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.25rem;
+  margin-top: 2.5rem;
+}
+.es-benefit-card {
+  position: relative;
+  padding: 1.75rem 1.5rem;
+  border: 1px solid var(--es-gold-dim);
+  border-radius: 6px;
+  background: linear-gradient(160deg, var(--es-green-850), var(--es-green-900));
+}
+.es-benefit-card .es-num {
+  display: inline-flex;
+  align-items: center; justify-content: center;
+  width: 34px; height: 34px;
+  border: 1px solid var(--es-gold);
+  border-radius: 50%;
+  color: var(--es-gold-bright);
+  font-family: var(--font-display);
+  font-size: 0.95rem;
+  margin-bottom: 1rem;
+}
+.es-benefit-card h3 {
+  font-family: var(--font-body);
+  color: var(--es-cream);
+  font-size: 1.02rem;
+  font-weight: 650;
+  line-height: 1.4;
+  margin: 0;
+}
+
+.es-cta-band {
+  border: 1px solid var(--es-gold-dim);
+  border-radius: 10px;
+  padding: clamp(2.5rem, 6vw, 4rem);
+  background: linear-gradient(155deg, var(--es-green-850) 0%, var(--es-green-950) 100%);
+  text-align: center;
+}
+.es-cta-band h2 { margin-inline: auto; }
+.es-cta-band p { margin-inline: auto; }
+.es-cta-actions { display: flex; justify-content: center; flex-wrap: wrap; gap: 1rem; margin-top: 2rem; }
+.es-license { margin-top: 1.5rem; font-size: 0.85rem; color: var(--es-cream-dim); letter-spacing: 0.03em; }
+
+body.enviroshake-page .img-frame { background-color: var(--es-espresso, #241a12); }
+
+@media (max-width: 900px) {
+  .es-split { grid-template-columns: 1fr; }
+  .es-split.reverse .es-split-media { order: 0; }
+  .es-benefits-grid { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 560px) {
+  .es-benefits-grid { grid-template-columns: 1fr; }
+  .es-hero-actions .es-btn { flex: 1 1 auto; }
 }

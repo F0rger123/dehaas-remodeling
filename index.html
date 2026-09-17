@@ -9,6 +9,9 @@
 (function () {
   if ("scrollRestoration" in history) history.scrollRestoration = "manual";
   var jumpToTop = function () {
+    // a focused form field (e.g. restored by the browser on an estimate-page
+    // revisit) can pull the viewport back down right after we scroll to top
+    if (document.activeElement && document.activeElement.blur) document.activeElement.blur();
     var prevBehavior = document.documentElement.style.scrollBehavior;
     document.documentElement.style.scrollBehavior = "auto";
     window.scrollTo(0, 0);
@@ -23,6 +26,13 @@
   });
   window.addEventListener("load", function () {
     if (!location.hash) jumpToTop();
+  });
+  // final defensive check: late web-font swap, image reflow, or a browser's
+  // own focus/autofill restoration can still nudge scroll after "load"
+  window.addEventListener("load", function () {
+    setTimeout(function () {
+      if (!location.hash) jumpToTop();
+    }, 150);
   });
   window.addEventListener("pageshow", function (e) {
     if (e.persisted && !location.hash) jumpToTop();
@@ -89,6 +99,7 @@
       <a href="index.html" aria-current="page">Home</a>
       <a href="about.html">About</a>
       <a href="services.html">Services</a>
+      <a href="enviroshake.html">EnviroShake</a>
       <a href="portfolio.html">Portfolio</a>
       <a href="estimate.html">Request Estimate</a>
     </nav>
@@ -103,6 +114,7 @@
   <a href="index.html">Home</a>
   <a href="about.html">About</a>
   <a href="services.html">Services</a>
+  <a href="enviroshake.html">EnviroShake</a>
   <a href="portfolio.html">Portfolio</a>
   <a href="estimate.html">Request Estimate</a>
   <a class="btn btn-primary btn-lg mp-cta" href="estimate.html">Get a Free Estimate</a>
@@ -323,6 +335,7 @@
         <ul>
           <li><a href="services.html#interior">Interior Remodeling</a></li>
           <li><a href="services.html#exterior">Exterior Remodeling</a></li>
+          <li><a href="enviroshake.html">Enviroshake Roofing</a></li>
           <li><a href="estimate.html">Request an Estimate</a></li>
         </ul>
       </div>

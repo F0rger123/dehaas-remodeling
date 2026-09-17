@@ -1,0 +1,279 @@
+<!doctype html>
+<html lang="en" class="no-js">
+<head>
+<meta charset="UTF-8" />
+<script>
+/* Set this as early as possible — before the browser gets a chance to run
+   its own automatic scroll restoration — otherwise a race lets it win and
+   the page can land scrolled to wherever a same-URL history entry left off. */
+(function () {
+  if ("scrollRestoration" in history) history.scrollRestoration = "manual";
+  var jumpToTop = function () {
+    // a focused form field (e.g. restored by the browser on an estimate-page
+    // revisit) can pull the viewport back down right after we scroll to top
+    if (document.activeElement && document.activeElement.blur) document.activeElement.blur();
+    var prevBehavior = document.documentElement.style.scrollBehavior;
+    document.documentElement.style.scrollBehavior = "auto";
+    window.scrollTo(0, 0);
+    document.documentElement.style.scrollBehavior = prevBehavior;
+  };
+  if (!location.hash) jumpToTop();
+  // some mobile browsers apply their own scroll restoration slightly later
+  // than this script runs (after DOM/asset load), which can silently undo
+  // the jump above — reassert it at a couple of later checkpoints too.
+  document.addEventListener("DOMContentLoaded", function () {
+    if (!location.hash) jumpToTop();
+  });
+  window.addEventListener("load", function () {
+    if (!location.hash) jumpToTop();
+  });
+  // final defensive check: late web-font swap, image reflow, or a browser's
+  // own focus/autofill restoration can still nudge scroll after "load"
+  window.addEventListener("load", function () {
+    setTimeout(function () {
+      if (!location.hash) jumpToTop();
+    }, 150);
+  });
+  window.addEventListener("pageshow", function (e) {
+    if (e.persisted && !location.hash) jumpToTop();
+  });
+})();
+</script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Enviroshake Composite Roofing in Pennsylvania | DeHaas Building and Remodeling Co.</title>
+<meta name="description" content="DeHaas Building and Remodeling Co. is a certified Enviroshake installer serving Pennsylvania — premium composite cedar shake and slate roofing built to handle PA weather with less maintenance." />
+<link rel="canonical" href="https://dehaasremodeling.com/enviroshake.html" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="DeHaas Building and Remodeling Co." />
+<meta property="og:title" content="Enviroshake Composite Roofing in Pennsylvania | DeHaas Building and Remodeling Co." />
+<meta property="og:description" content="Certified Enviroshake installer serving Pennsylvania — premium composite cedar shake and slate roofing, built to handle PA weather with less maintenance." />
+<meta property="og:url" content="https://dehaasremodeling.com/enviroshake.html" />
+<meta property="og:image" content="https://dehaasremodeling.com/assets/img/enviroshake-jones-roof-1200.jpg" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Enviroshake Composite Roofing in Pennsylvania | DeHaas Building and Remodeling Co." />
+<meta name="twitter:description" content="Certified Enviroshake installer serving Pennsylvania homeowners." />
+<meta name="twitter:image" content="https://dehaasremodeling.com/assets/img/enviroshake-jones-roof-1200.jpg" />
+<link rel="icon" href="assets/img/logo.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,560;9..144,620&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="assets/css/style.css" />
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "Enviroshake Composite Roofing Installation",
+  "serviceType": "Composite cedar shake and slate roofing installation",
+  "provider": {
+    "@type": "GeneralContractor",
+    "name": "DeHaas Building and Remodeling Co.",
+    "url": "https://dehaasremodeling.com/"
+  },
+  "areaServed": [
+    { "@type": "AdministrativeArea", "name": "York County, PA" },
+    { "@type": "AdministrativeArea", "name": "Adams County, PA" }
+  ],
+  "description": "DeHaas Building and Remodeling Co. installs Enviroshake composite roofing across Pennsylvania — a premium recycled-composite system that replicates cedar shake, cedar shingle and natural slate."
+}
+</script>
+</head>
+<body class="enviroshake-page">
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="site-header">
+  <div class="container nav-row">
+    <a class="brand" href="index.html">
+      <img src="assets/img/logo.png" alt="DeHaas Building and Remodeling Co. logo" />
+    </a>
+    <nav class="nav-links" aria-label="Primary">
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="services.html">Services</a>
+      <a href="enviroshake.html" aria-current="page">EnviroShake</a>
+      <a href="portfolio.html">Portfolio</a>
+      <a href="estimate.html">Request Estimate</a>
+    </nav>
+    <div class="nav-actions">
+      <a class="btn btn-primary btn-sm" href="estimate.html">Get a Free Estimate</a>
+      <button class="nav-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-panel"><span class="bars"><span class="bar"></span><span class="bar"></span><span class="bar"></span></span></button>
+    </div>
+  </div>
+</header>
+
+<div class="mobile-panel" id="mobile-panel">
+  <a href="index.html">Home</a>
+  <a href="about.html">About</a>
+  <a href="services.html">Services</a>
+  <a href="enviroshake.html">EnviroShake</a>
+  <a href="portfolio.html">Portfolio</a>
+  <a href="estimate.html">Request Estimate</a>
+  <a class="btn btn-primary btn-lg mp-cta" href="estimate.html">Get a Free Estimate</a>
+  <p class="mp-meta">York &amp; Adams County, PA · PA License #PA214704</p>
+</div>
+
+<main id="main">
+
+  <section class="es-hero">
+    <div class="es-hero-media">
+      <picture>
+        <source type="image/webp" srcset="assets/img/enviroshake-jones-roof-480.webp 480w, assets/img/enviroshake-jones-roof-800.webp 800w, assets/img/enviroshake-jones-roof-1200.webp 1200w, assets/img/enviroshake-jones-roof-1600.webp 1600w" sizes="100vw" />
+        <source type="image/jpeg" srcset="assets/img/enviroshake-jones-roof-480.jpg 480w, assets/img/enviroshake-jones-roof-800.jpg 800w, assets/img/enviroshake-jones-roof-1200.jpg 1200w, assets/img/enviroshake-jones-roof-1600.jpg 1600w" sizes="100vw" />
+        <img class="progressive-img" src="assets/img/enviroshake-jones-roof-1200.jpg" decoding="async" alt="Home with a premium Enviroshake composite shake roof, copper-capped dormers and stone facade" fetchpriority="high" />
+      </picture>
+    </div>
+    <div class="container es-hero-inner">
+      <span class="es-badge"><span class="dot"></span>Certified Enviroshake Partner &mdash; One of Four in York, PA</span>
+      <h1 data-reveal>Enviroshake Composite Roofing, Built for Pennsylvania.</h1>
+      <p class="es-hero-lede" data-reveal>If you love the timeless look of cedar shake or natural slate but want a roof built to handle Pennsylvania's changing weather with less maintenance, Enviroshake may be the perfect solution. DeHaas Building &amp; Remodeling Co. installs premium Enviroshake roofing across Pennsylvania, helping homeowners achieve the character of traditional roofing materials without the drawbacks.</p>
+      <div class="es-hero-actions" data-reveal>
+        <a class="es-btn es-btn-primary" href="estimate.html">Schedule Your Estimate</a>
+        <a class="es-btn es-btn-outline" href="#what-is-enviroshake">Explore the Collection</a>
+      </div>
+    </div>
+    <div class="es-scroll-cue"><span>Scroll</span><span class="line"></span></div>
+  </section>
+
+  <section class="es-section" id="what-is-enviroshake">
+    <div class="container es-split">
+      <div>
+        <p class="es-eyebrow">The Material</p>
+        <h2 data-reveal>What Is Enviroshake Roofing?</h2>
+        <p class="es-lede" data-reveal>Enviroshake is a premium composite roofing system designed to replicate the natural texture and appearance of cedar shake, cedar shingles, and slate. It is made from a blend of recycled polymers, elastomers, and natural fibers &mdash; giving it strong durability while maintaining the authentic character homeowners love.</p>
+        <p data-reveal>Unlike natural cedar, this synthetic shake roofing is engineered to resist rot, insects, mold, mildew, and moisture damage. It also withstands UV exposure, hail, and Pennsylvania's freeze-thaw cycles, making it a dependable roofing option for homes throughout the region.</p>
+      </div>
+      <div class="es-split-media" data-reveal>
+        <div class="es-logo-plaque-wrap">
+          <div class="es-logo-plaque">
+            <img src="assets/img/enviroshake-logo.png" alt="Enviroshake — Quality Engineered Roofing" />
+          </div>
+          <p class="es-logo-caption">Official Enviroshake&reg; Composite Roofing System</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="es-section es-section-alt">
+    <div class="container">
+      <div style="max-width:46rem" data-reveal>
+        <p class="es-eyebrow">The Advantages</p>
+        <h2>Why Choose Enviroshake for Your Home?</h2>
+        <p class="es-lede">A roof should do more than protect your home &mdash; it should complement its style and provide lasting value. Enviroshake delivers the distinctive appearance of cedar or slate without many of the maintenance concerns associated with natural materials.</p>
+      </div>
+      <div class="es-benefits-grid" data-reveal-group>
+        <div class="es-benefit-card" data-reveal><span class="es-num">1</span><h3>Authentic cedar shake and slate appearance</h3></div>
+        <div class="es-benefit-card" data-reveal><span class="es-num">2</span><h3>Class 4 impact resistance</h3></div>
+        <div class="es-benefit-card" data-reveal><span class="es-num">3</span><h3>Wind resistance up to 180 mph</h3></div>
+        <div class="es-benefit-card" data-reveal><span class="es-num">4</span><h3>Available Class A fire-rated roofing systems</h3></div>
+        <div class="es-benefit-card" data-reveal><span class="es-num">5</span><h3>Resistance to mold, mildew, insects and rot</h3></div>
+        <div class="es-benefit-card" data-reveal><span class="es-num">6</span><h3>Long-lasting color with advanced UV protection</h3></div>
+        <div class="es-benefit-card" data-reveal><span class="es-num">7</span><h3>Transferable limited lifetime material warranty</h3></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="es-section">
+    <div class="container es-split">
+      <div class="es-split-media" data-reveal>
+        <div class="es-frame">
+          <picture>
+            <source type="image/webp" srcset="assets/img/enviroshake-eagle-ridge-480.webp 480w, assets/img/enviroshake-eagle-ridge-800.webp 800w, assets/img/enviroshake-eagle-ridge-1200.webp 1200w, assets/img/enviroshake-eagle-ridge-1600.webp 1600w" sizes="(max-width:900px) 92vw, 46vw" />
+            <source type="image/jpeg" srcset="assets/img/enviroshake-eagle-ridge-480.jpg 480w, assets/img/enviroshake-eagle-ridge-800.jpg 800w, assets/img/enviroshake-eagle-ridge-1200.jpg 1200w, assets/img/enviroshake-eagle-ridge-1600.jpg 1600w" sizes="(max-width:900px) 92vw, 46vw" />
+            <img class="progressive-img" src="assets/img/enviroshake-eagle-ridge-1200.jpg" decoding="async" alt="Enviroshake silvered cedar profile roof on a stone home, Eagle Ridge Drive" loading="lazy" />
+          </picture>
+          <div class="es-frame-cap">Enviroshake, Silvered Cedar profile &mdash; Eagle Ridge Dr.</div>
+        </div>
+      </div>
+      <div>
+        <p class="es-eyebrow">Styles &amp; Profiles</p>
+        <h2 data-reveal>Find the Right Enviroshake Roofing Style</h2>
+        <p class="es-lede" data-reveal>Enviroshake offers several profiles to complement different architectural styles &mdash; from the rustic look of composite cedar shakes to the clean lines of cedar shingles, or the timeless elegance of Enviroslate roofing. There's an option for nearly every home.</p>
+        <p data-reveal>As experienced Enviroshake installers, our team will help you compare available styles, colors, and profiles to find the best fit for your home's design and long-term goals.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="es-section es-section-alt">
+    <div class="container es-split reverse">
+      <div class="es-split-media" data-reveal>
+        <div class="es-frame">
+          <picture>
+            <source type="image/webp" srcset="assets/img/enviroshake-jones-roof-480.webp 480w, assets/img/enviroshake-jones-roof-800.webp 800w, assets/img/enviroshake-jones-roof-1200.webp 1200w, assets/img/enviroshake-jones-roof-1600.webp 1600w" sizes="(max-width:900px) 92vw, 46vw" />
+            <source type="image/jpeg" srcset="assets/img/enviroshake-jones-roof-480.jpg 480w, assets/img/enviroshake-jones-roof-800.jpg 800w, assets/img/enviroshake-jones-roof-1200.jpg 1200w, assets/img/enviroshake-jones-roof-1600.jpg 1600w" sizes="(max-width:900px) 92vw, 46vw" />
+            <img class="progressive-img" src="assets/img/enviroshake-jones-roof-1200.jpg" decoding="async" alt="Enviroshake composite shake roof with copper dormer caps, Westchester PA" loading="lazy" />
+          </picture>
+          <div class="es-frame-cap">Enviroshake install, Westchester, PA</div>
+        </div>
+      </div>
+      <div>
+        <p class="es-eyebrow">Why DeHaas</p>
+        <h2 data-reveal>Why Homeowners Trust DeHaas Building &amp; Remodeling Co.</h2>
+        <p class="es-lede" data-reveal>Choosing premium roofing materials is only part of the investment. Having your roof professionally installed by a trusted remodeling company ensures it performs for years to come.</p>
+        <p data-reveal>At DeHaas Building &amp; Remodeling Co., we take pride in delivering quality craftsmanship, honest communication, and personalized service from start to finish. We'll show you your options, answer your questions, and complete your roofing project with the same attention to detail we'd expect for our own homes.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="es-section es-section-espresso">
+    <div class="container">
+      <div class="es-cta-band" data-reveal>
+        <p class="es-eyebrow" style="justify-content:center">Ready When You Are</p>
+        <h2>Schedule Your Enviroshake Roofing Estimate</h2>
+        <p>If you're considering Enviroshake roofing in Pennsylvania, DeHaas Building &amp; Remodeling Co. is here to help. We proudly serve homeowners throughout York and Adams Counties with premium roofing solutions designed for lasting beauty and performance.</p>
+        <div class="es-cta-actions">
+          <a class="es-btn es-btn-primary" href="estimate.html">Request an Estimate</a>
+          <a class="es-btn es-btn-outline" href="portfolio.html">See Our Work</a>
+        </div>
+        <p class="es-license">PA License #PA214704</p>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-brand">
+          <img src="assets/img/logo.png" alt="" />
+          <span>DeHaas Building &amp; Remodeling Co.</span>
+        </div>
+        <p style="max-width:32ch">Quality, honesty and integrity &mdash; interior and exterior remodeling across York and Adams Counties, Pennsylvania.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="about.html">About</a></li>
+          <li><a href="services.html">Services</a></li>
+          <li><a href="portfolio.html">Portfolio</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Services</h4>
+        <ul>
+          <li><a href="services.html#interior">Interior Remodeling</a></li>
+          <li><a href="services.html#exterior">Exterior Remodeling</a></li>
+          <li><a href="enviroshake.html">Enviroshake Roofing</a></li>
+          <li><a href="estimate.html">Request an Estimate</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Details</h4>
+        <ul>
+          <li>PA License #PA214704</li>
+          <li>York &amp; Adams Counties, PA</li>
+          <li><a href="estimate.html">Contact via estimate form</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; <span id="year"></span> DeHaas Building and Remodeling Co. All rights reserved.</span>
+      <span>PA License #PA214704</span>
+    </div>
+  </div>
+</footer>
+
+<script>document.getElementById("year").textContent = new Date().getFullYear();</script>
+<script src="assets/js/main.js"></script>
+</body>
+</html>
