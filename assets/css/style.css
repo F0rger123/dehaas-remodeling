@@ -869,12 +869,16 @@ section { position: relative; padding-block: clamp(4.5rem, 9vh, 7.5rem); }
   color: var(--white);
   padding: clamp(2.2rem, 4vw, 3.4rem);
   position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 .estimate-info h2 { color: var(--white); }
 .estimate-info p { color: rgba(232,238,244,0.75); }
-.estimate-info ul { list-style: none; padding: 0; margin: 2rem 0 0; display: grid; gap: 1.2rem; }
-.estimate-info li { display: flex; gap: 0.8rem; align-items: flex-start; font-size: 0.94rem; color: rgba(232,238,244,0.88); }
-.estimate-info li b { color: var(--white); display: block; }
+.estimate-info ul { list-style: none; padding: 0; margin: 2rem 0 0; display: grid; gap: 1.1rem; }
+.estimate-info li { display: flex; flex-direction: column; gap: 0.25rem; }
+.estimate-info li b { color: var(--white); font-size: 0.95rem; }
+.estimate-info li span { color: rgba(232,238,244,0.72); font-size: 0.88rem; line-height: 1.5; }
 .estimate-form { background: var(--white); padding: clamp(2.2rem, 4vw, 3.4rem); }
 .field { margin-bottom: 1.3rem; }
 .field label { display: block; font-size: 0.85rem; font-weight: 600; color: var(--navy-900); margin-bottom: 0.45rem; }
