@@ -8,34 +8,51 @@
    the page can land scrolled to wherever a same-URL history entry left off. */
 (function () {
   if ("scrollRestoration" in history) history.scrollRestoration = "manual";
-  var jumpToTop = function () {
+  var HEADER_OFFSET = 96; // matches html { scroll-padding-top } in style.css
+  var blurActive = function () {
     // a focused form field (e.g. restored by the browser on an estimate-page
-    // revisit) can pull the viewport back down right after we scroll to top
+    // revisit) can pull the viewport back down right after we scroll
     if (document.activeElement && document.activeElement.blur) document.activeElement.blur();
+  };
+  var jumpToTop = function () {
+    blurActive();
     var prevBehavior = document.documentElement.style.scrollBehavior;
     document.documentElement.style.scrollBehavior = "auto";
     window.scrollTo(0, 0);
     document.documentElement.style.scrollBehavior = prevBehavior;
   };
-  if (!location.hash) jumpToTop();
+  var jumpToHash = function () {
+    var id = decodeURIComponent(location.hash.slice(1));
+    var el = id && document.getElementById(id);
+    if (!el) return false;
+    blurActive();
+    var prevBehavior = document.documentElement.style.scrollBehavior;
+    document.documentElement.style.scrollBehavior = "auto";
+    var y = el.getBoundingClientRect().top + window.pageYOffset - HEADER_OFFSET;
+    window.scrollTo(0, Math.max(0, y));
+    document.documentElement.style.scrollBehavior = prevBehavior;
+    return true;
+  };
+  // when navigating to a section anchor (e.g. from another page's footer
+  // link), keep landing on that section instead of snapping back to top —
+  // and re-assert it below, since late images/fonts can reflow the page
+  // and quietly drift the target section out from under the initial scroll.
+  var settle = function () {
+    if (!location.hash || !jumpToHash()) jumpToTop();
+  };
+  settle();
   // some mobile browsers apply their own scroll restoration slightly later
   // than this script runs (after DOM/asset load), which can silently undo
   // the jump above — reassert it at a couple of later checkpoints too.
-  document.addEventListener("DOMContentLoaded", function () {
-    if (!location.hash) jumpToTop();
-  });
-  window.addEventListener("load", function () {
-    if (!location.hash) jumpToTop();
-  });
+  document.addEventListener("DOMContentLoaded", settle);
+  window.addEventListener("load", settle);
   // final defensive check: late web-font swap, image reflow, or a browser's
   // own focus/autofill restoration can still nudge scroll after "load"
   window.addEventListener("load", function () {
-    setTimeout(function () {
-      if (!location.hash) jumpToTop();
-    }, 150);
+    setTimeout(settle, 150);
   });
   window.addEventListener("pageshow", function (e) {
-    if (e.persisted && !location.hash) jumpToTop();
+    if (e.persisted) settle();
   });
 })();
 </script>

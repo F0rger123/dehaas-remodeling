@@ -302,7 +302,11 @@ body.is-home .site-header:not(.is-scrolled) .brand img { height: 76px; }
   cursor: pointer;
   flex-shrink: 0;
   padding: 0;
+  transition: transform var(--dur-fast) var(--ease-out), background var(--dur-med) var(--ease-out), border-color var(--dur-med) var(--ease-out);
 }
+.nav-toggle:hover { transform: scale(1.07); }
+.nav-toggle:active { transform: scale(0.9); }
+.nav-toggle[aria-expanded="true"] { background: var(--navy-900); border-color: var(--navy-900); }
 .nav-toggle .bars {
   position: absolute;
   left: 13px; right: 13px; top: 15px; bottom: 15px;
@@ -316,8 +320,9 @@ body.is-home .site-header:not(.is-scrolled) .brand img { height: 76px; }
   border-radius: 2px;
   background: var(--navy-900);
   transform-origin: center;
-  transition: transform var(--dur-fast) var(--ease-out), opacity var(--dur-fast) var(--ease-out);
+  transition: transform 380ms var(--ease-spring), opacity 180ms var(--ease-out), background var(--dur-med) var(--ease-out);
 }
+.nav-toggle[aria-expanded="true"] .bar { background: var(--white); }
 .nav-toggle[aria-expanded="true"] .bar:nth-child(1) { transform: translateY(7px) rotate(45deg); }
 .nav-toggle[aria-expanded="true"] .bar:nth-child(2) { opacity: 0; transform: scaleX(0); }
 .nav-toggle[aria-expanded="true"] .bar:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
@@ -1132,6 +1137,7 @@ body.enviroshake-page .site-footer { background: var(--es-green-950); }
 
 /* header floats transparent-on-photo at the top of the ES hero too */
 body.enviroshake-page .site-header:not(.is-scrolled) .brand { color: var(--es-cream); }
+body.enviroshake-page .site-header:not(.is-scrolled) .brand img { height: 76px; }
 body.enviroshake-page .site-header:not(.is-scrolled) .nav-links a { color: rgba(238,242,238,0.86); }
 body.enviroshake-page .site-header.is-scrolled::before { background: rgba(10,31,23,0.94); }
 body.enviroshake-page .site-header.is-scrolled .brand,
@@ -1152,6 +1158,10 @@ body.enviroshake-page .nav-toggle {
   border-color: var(--es-line);
 }
 body.enviroshake-page .nav-toggle .bar { background: var(--es-cream); }
+body.enviroshake-page .nav-toggle[aria-expanded="true"] {
+  background: var(--es-accent-mid);
+  border-color: var(--es-accent-bright);
+}
 body.enviroshake-page .mobile-panel {
   background: var(--es-green-950);
 }
@@ -1234,27 +1244,29 @@ body.enviroshake-page .es-hero-media::after {
 .es-badge {
   display: inline-flex;
   align-items: center;
-  gap: 0.6rem;
-  border: 1px solid rgba(18,53,36,0.1);
+  gap: 0.7rem;
+  border: 1px solid rgba(238,242,238,0.32);
   border-radius: 999px;
-  padding: 0.5em 1.1em;
+  padding: 0.6em 1.3em;
   font-family: var(--font-body);
-  font-size: 0.78rem;
-  font-weight: 700;
-  letter-spacing: 0.08em;
+  font-size: 0.74rem;
+  font-weight: 600;
+  letter-spacing: 0.15em;
   text-transform: uppercase;
-  color: var(--es-accent-mid);
-  background: var(--es-cream);
-  box-shadow: 0 10px 28px -14px rgba(0,0,0,0.55);
+  color: var(--es-cream);
+  background: rgba(6,21,16,0.5);
+  backdrop-filter: blur(8px) saturate(1.3);
+  -webkit-backdrop-filter: blur(8px) saturate(1.3);
+  box-shadow: 0 10px 30px -16px rgba(0,0,0,0.65), inset 0 1px 0 rgba(255,255,255,0.07);
   margin-bottom: 1.5rem;
 }
 .es-badge .dot {
-  width: 6px; height: 6px; border-radius: 50%; background: var(--es-accent-mid); flex: none;
+  width: 6px; height: 6px; border-radius: 50%; background: var(--es-accent-bright); flex: none;
   animation: es-pulse 2.4s ease-in-out infinite;
 }
 @keyframes es-pulse {
-  0%, 100% { box-shadow: 0 0 0 0 rgba(28,81,56,0.5); }
-  50% { box-shadow: 0 0 0 5px rgba(28,81,56,0); }
+  0%, 100% { box-shadow: 0 0 0 0 rgba(61,143,102,0.55); }
+  50% { box-shadow: 0 0 0 5px rgba(61,143,102,0); }
 }
 .es-hero h1 {
   font-family: var(--font-display);
