@@ -281,7 +281,7 @@
         <p>If you're considering Enviroshake roofing in Pennsylvania, DeHaas Building &amp; Remodeling Co. is here to help. We proudly serve homeowners throughout York and Adams Counties with premium roofing solutions designed for lasting beauty and performance.</p>
         <div class="es-cta-actions">
           <a class="es-btn es-btn-primary" href="estimate.html">Request an Estimate</a>
-          <a class="es-btn es-btn-outline" href="assets/downloads/enviroshake-informational-packet.pdf" download>Download the Informational Packet</a>
+          <a class="es-btn es-btn-outline" href="assets/downloads/enviroshake-informational-packet.pdf" download="enviroshake-informational-packet.pdf" data-packet-download>Download the Informational Packet</a>
         </div>
         <p class="es-license">PA License #PA214704</p>
       </div>
@@ -335,5 +335,26 @@
 
 <script>document.getElementById("year").textContent = new Date().getFullYear();</script>
 <script src="assets/js/main.js"></script>
+<script>
+(async function () {
+  var links = document.querySelectorAll("a[data-packet-download]");
+  if (!links.length || !window.claude || !window.claude.use) return;
+  var downloads = null;
+  try { downloads = await window.claude.use("downloads"); } catch (e) {}
+  if (!downloads) return;
+  links.forEach(function (link) {
+    link.addEventListener("click", async function (e) {
+      e.preventDefault();
+      try {
+        var res = await fetch(link.getAttribute("href"));
+        var blob = await res.blob();
+        await downloads.save({ filename: "enviroshake-informational-packet.pdf", data: blob });
+      } catch (err) {
+        window.location.href = link.getAttribute("href");
+      }
+    });
+  });
+})();
+</script>
 </body>
 </html>
