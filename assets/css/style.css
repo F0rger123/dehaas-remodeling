@@ -761,6 +761,39 @@ section { position: relative; padding-block: clamp(4.5rem, 9vh, 7.5rem); }
 .pillar-list strong { display: block; color: var(--navy-900); font-size: 0.95rem; }
 .pillar-list span { font-size: 0.88rem; color: var(--ink-soft); }
 
+/* ------------------------------------ faq ----------------------------------- */
+.faq-list { max-width: 54rem; margin-top: 2rem; display: grid; gap: 0.9rem; }
+.faq-item {
+  border: 1px solid rgba(12,30,48,0.12);
+  border-radius: var(--radius-sm);
+  background: var(--white);
+  overflow: hidden;
+}
+.faq-item summary {
+  cursor: pointer;
+  list-style: none;
+  padding: 1.1rem 1.4rem;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1.05rem;
+  color: var(--navy-900);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+.faq-item summary::-webkit-details-marker { display: none; }
+.faq-item summary::after {
+  content: "+";
+  font-size: 1.4rem;
+  line-height: 1;
+  color: var(--ink-soft);
+  flex: none;
+}
+.faq-item[open] summary::after { content: "\2212"; }
+.faq-item .faq-answer { padding: 0 1.4rem 1.3rem; }
+.faq-item .faq-answer p { margin: 0; color: var(--ink-soft); line-height: 1.7; }
+
 /* ------------------------------------ cta ----------------------------------- */
 
 .cta-band {
@@ -1174,14 +1207,25 @@ body.enviroshake-page .es-hero-media::after {
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(ellipse 70% 60% at 15% 15%, rgba(28,81,56,0.28), transparent 55%),
-    linear-gradient(180deg, rgba(6,21,16,0.3) 0%, rgba(6,21,16,0.4) 35%, rgba(6,21,16,0.97) 100%),
-    linear-gradient(90deg, rgba(6,21,16,0.78) 0%, rgba(6,21,16,0.18) 60%);
+    radial-gradient(ellipse 70% 60% at 15% 15%, rgba(28,81,56,0.22), transparent 55%),
+    linear-gradient(180deg, rgba(6,21,16,0.58) 0%, rgba(6,21,16,0.66) 35%, rgba(6,21,16,0.98) 100%),
+    linear-gradient(90deg, rgba(6,21,16,0.88) 0%, rgba(6,21,16,0.32) 62%);
 }
 .es-hero-inner {
   position: relative;
   z-index: 2;
   padding-block: clamp(6rem, 14vh, 9rem) clamp(3.5rem, 8vh, 5rem);
+}
+.es-hero-inner::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  left: -6vw;
+  right: -6vw;
+  top: -3rem;
+  bottom: -2rem;
+  background: radial-gradient(ellipse 80% 90% at 18% 45%, rgba(6,21,16,0.68), rgba(6,21,16,0.3) 55%, transparent 78%);
+  pointer-events: none;
 }
 .es-badge {
   display: inline-flex;
@@ -1210,12 +1254,14 @@ body.enviroshake-page .es-hero-media::after {
 }
 .es-hero h1 {
   font-family: var(--font-display);
-  font-weight: 560;
+  font-weight: 600;
   font-size: clamp(2.3rem, 5vw, 4rem);
-  line-height: 1.1;
+  line-height: 1.12;
+  letter-spacing: -0.01em;
   color: var(--es-cream);
   max-width: 20ch;
   text-wrap: balance;
+  text-shadow: 0 4px 32px rgba(6,21,16,0.7), 0 1px 4px rgba(6,21,16,0.6);
 }
 .es-eyebrow {
   display: inline-flex;
@@ -1232,10 +1278,12 @@ body.enviroshake-page .es-hero-media::after {
 .es-eyebrow::before { content: ""; width: 32px; height: 1px; background: var(--es-accent-mid); }
 .es-hero-lede {
   font-size: 1.15rem;
+  font-weight: 450;
   line-height: 1.7;
-  color: rgba(238,242,238,0.82);
+  color: rgba(238,242,238,0.94);
   max-width: 52ch;
   margin-top: 1.25rem;
+  text-shadow: 0 2px 20px rgba(6,21,16,0.65);
 }
 .es-hero-actions { display: flex; flex-wrap: wrap; gap: 1rem; margin-top: 2.25rem; }
 
@@ -1504,6 +1552,15 @@ body.enviroshake-page .es-hero-media::after {
 }
 .es-info-strip p { margin: 0; font-size: 0.94rem; }
 .es-info-strip strong { color: var(--es-cream); }
+
+/* faq: dark-theme override */
+body.enviroshake-page .faq-item {
+  border-color: var(--es-line);
+  background: linear-gradient(160deg, var(--es-green-850), var(--es-green-900));
+}
+body.enviroshake-page .faq-item summary { color: var(--es-cream); }
+body.enviroshake-page .faq-item summary::after { color: var(--es-accent-bright); }
+body.enviroshake-page .faq-item .faq-answer p { color: var(--es-cream-dim); }
 
 .es-cta-band {
   border: 1px solid var(--es-line);
