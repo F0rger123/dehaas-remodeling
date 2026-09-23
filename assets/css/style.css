@@ -62,6 +62,12 @@
 /* base size bumped ~6% (16px -> 17px) for easier reading — scales every
    rem-based measurement on the site along with it */
 html { scroll-behavior: smooth; scroll-padding-top: 96px; background: var(--paper); font-size: 106.25%; }
+/* the EnviroShake page is dark end-to-end; without this, overscroll/bounce
+   at the top or bottom reveals the site-wide light html background instead
+   of matching the page, which reads as the dark overlay "not covering"
+   the page. Belt-and-suspenders with the inline style on <html> in
+   enviroshake.html, which also covers the first paint before this loads. */
+html:has(body.enviroshake-page) { background: #061510; }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   *, *::before, *::after {
@@ -747,24 +753,21 @@ section { position: relative; padding-block: clamp(4.5rem, 9vh, 7.5rem); }
 
 .pillar-list { list-style: none; margin: 1.8rem 0 0; padding: 0; display: grid; gap: 1rem; }
 .pillar-list li {
-  display: flex; gap: 0.9rem; align-items: flex-start;
-  padding: 1rem 1.1rem;
+  padding: 1.1rem 1.3rem;
   background: var(--white);
   border-radius: var(--radius-sm);
   border: 1px solid rgba(23,51,79,0.08);
 }
-.pillar-list .ico {
-  flex-shrink: 0;
-  width: 34px; height: 34px;
-  border-radius: 50%;
-  background: var(--navy-50);
-  color: var(--navy-800);
-  display: grid; place-items: center;
+.pillar-word {
+  display: flex;
+  align-items: baseline;
+  gap: 0.1em;
   font-family: var(--font-display);
-  font-size: 0.95rem;
+  margin-bottom: 0.3rem;
 }
-.pillar-list strong { display: block; color: var(--navy-900); font-size: 0.95rem; }
-.pillar-list span { font-size: 0.88rem; color: var(--ink-soft); }
+.pillar-cap { font-size: 2.1rem; font-weight: 600; line-height: 1; color: var(--red-600); }
+.pillar-rest { font-size: 0.92rem; font-weight: 600; letter-spacing: 0.22em; color: var(--navy-900); }
+.pillar-desc { display: block; font-size: 0.88rem; color: var(--ink-soft); }
 
 /* ------------------------------------ faq ----------------------------------- */
 .faq-list { max-width: 54rem; margin-top: 2rem; display: grid; gap: 0.9rem; }
@@ -1143,6 +1146,10 @@ body.enviroshake-page .site-header.is-scrolled::before { background: rgba(10,31,
 body.enviroshake-page .site-header.is-scrolled .brand,
 body.enviroshake-page .site-header.is-scrolled .nav-links a { color: var(--es-cream); }
 body.enviroshake-page .site-header .nav-links a[aria-current="page"] { color: var(--es-accent-bright); }
+/* the sliding underline uses site-wide red — swap it for the page's own
+   green (hover preview) / cream (the "you are here" EnviroShake tab) */
+body.enviroshake-page .nav-links a::after { background: var(--es-accent-bright); }
+body.enviroshake-page .nav-links a[aria-current="page"]::after { background: var(--es-cream); }
 
 /* the header CTA + hamburger pick up the page's own dark-green identity
    instead of the site-wide red, to match the logo swap below */
@@ -1184,8 +1191,10 @@ body.enviroshake-page .es-hero-media::after {
   z-index: 0;
   pointer-events: none;
   background:
-    radial-gradient(ellipse 60% 45% at 12% -10%, var(--es-accent-glow), transparent 60%),
-    radial-gradient(ellipse 55% 50% at 105% 110%, rgba(0,0,0,0.55), transparent 60%);
+    radial-gradient(ellipse 65% 50% at 8% -15%, var(--es-accent-glow), transparent 62%),
+    radial-gradient(ellipse 45% 40% at 96% 8%, rgba(61,143,102,0.16), transparent 58%),
+    radial-gradient(ellipse 60% 55% at 105% 112%, rgba(0,0,0,0.6), transparent 62%),
+    linear-gradient(115deg, transparent 42%, rgba(61,143,102,0.05) 52%, transparent 62%);
 }
 .es-depth::after {
   content: "";
