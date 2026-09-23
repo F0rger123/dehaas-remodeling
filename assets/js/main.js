@@ -54,22 +54,23 @@
       a.addEventListener("click", (e) => {
         const href = a.getAttribute("href") || "";
         const samePageAnchor = href.charAt(0) === "#";
-        closeMenu();
-        // let the close animation actually play before the page unloads —
-        // otherwise navigation and the CSS transition race independently,
-        // and depending on how fast the next page loads, the old page can
-        // fully reappear (menu closed) for a beat before the jump, which
-        // reads as a glitch instead of a transition. A same-tab, unmodified
-        // click on a real link gets a short controlled delay instead;
-        // modified clicks (new tab, etc.) and in-page anchors go through
-        // immediately so they keep working exactly as expected.
-        if (samePageAnchor || !href || e.defaultPrevented || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button !== 0) {
-          return;
+        const navigating = !samePageAnchor && href && !e.defaultPrevented && !e.metaKey && !e.ctrlKey && !e.shiftKey && !e.altKey && e.button === 0;
+        if (navigating) {
+          // Closing with its normal animated fade and then either racing the
+          // page unload (glitchy: the old page can fully reappear for a beat
+          // before an abrupt cut) or delaying navigation to let the fade
+          // finish (adds a real, felt pause on top of actual network time)
+          // both make real-world navigation feel worse. When we know we're
+          // about to leave the page, just hide the panel instantly instead —
+          // no animation to race against, so the browser can start loading
+          // the next page right away, exactly as fast as any plain link.
+          panel.style.transition = "none";
+          closeMenu();
+          void panel.offsetHeight; // flush the instant state before restoring
+          panel.style.transition = "";
+        } else {
+          closeMenu();
         }
-        e.preventDefault();
-        window.setTimeout(() => {
-          window.location.href = href;
-        }, 240);
       });
     });
     window.addEventListener("keydown", (e) => {
