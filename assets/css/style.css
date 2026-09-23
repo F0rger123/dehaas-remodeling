@@ -1176,8 +1176,7 @@ body.enviroshake-page .mobile-panel a { color: var(--es-cream); }
 body.enviroshake-page .mp-meta { color: var(--es-cream-dim); }
 
 /* ---------------------------------- texture: layered depth ---------------------------------- */
-body.enviroshake-page .es-section,
-body.enviroshake-page .es-hero-media::after {
+body.enviroshake-page .es-section {
   position: relative;
 }
 .es-depth {
@@ -1230,9 +1229,9 @@ body.enviroshake-page .es-hero-media::after {
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(ellipse 70% 60% at 15% 15%, rgba(28,81,56,0.22), transparent 55%),
-    linear-gradient(180deg, rgba(6,21,16,0.58) 0%, rgba(6,21,16,0.66) 35%, rgba(6,21,16,0.98) 100%),
-    linear-gradient(90deg, rgba(6,21,16,0.88) 0%, rgba(6,21,16,0.32) 62%);
+    radial-gradient(ellipse 70% 60% at 15% 15%, rgba(28,81,56,0.16), transparent 55%),
+    linear-gradient(180deg, rgba(6,21,16,0.72) 0%, rgba(6,21,16,0.78) 40%, rgba(6,21,16,0.97) 100%),
+    linear-gradient(90deg, rgba(6,21,16,0.9) 0%, rgba(6,21,16,0.58) 50%, rgba(6,21,16,0.85) 100%);
 }
 .es-hero-inner {
   position: relative;
