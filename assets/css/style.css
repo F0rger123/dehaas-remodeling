@@ -1192,8 +1192,9 @@ body.enviroshake-page .es-section {
   background:
     radial-gradient(ellipse 65% 50% at 8% -15%, var(--es-accent-glow), transparent 62%),
     radial-gradient(ellipse 45% 40% at 96% 8%, rgba(61,143,102,0.16), transparent 58%),
+    radial-gradient(ellipse 55% 50% at 6% 108%, rgba(61,143,102,0.12), transparent 60%),
     radial-gradient(ellipse 60% 55% at 105% 112%, rgba(0,0,0,0.6), transparent 62%),
-    linear-gradient(115deg, transparent 42%, rgba(61,143,102,0.05) 52%, transparent 62%);
+    linear-gradient(115deg, transparent 42%, rgba(61,143,102,0.06) 52%, transparent 62%);
   background-size: 130% 130%;
   background-position: 0% 0%;
   animation: es-depth-drift 24s ease-in-out infinite alternate;
@@ -1208,12 +1209,33 @@ body.enviroshake-page .es-section {
   inset: 0;
   z-index: 0;
   pointer-events: none;
-  opacity: 0.05;
+  opacity: 0.07;
   mix-blend-mode: overlay;
   background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='120'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
   background-size: 180px 180px;
 }
 .es-depth > * { position: relative; z-index: 1; }
+
+/* a large, faint ring motif for text-heavy sections with open space
+   (e.g. Why Choose, FAQ) — sits behind content, hidden wherever a
+   card or list item's own opaque background covers it */
+.es-motif {
+  position: absolute;
+  top: 50%;
+  right: 2%;
+  width: min(40vw, 540px);
+  height: min(40vw, 540px);
+  transform: translateY(-50%);
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'><g fill='none' stroke='%233d8f66' stroke-width='0.6'><circle cx='100' cy='100' r='38'/><circle cx='100' cy='100' r='68'/><circle cx='100' cy='100' r='98'/><line x1='2' y1='100' x2='198' y2='100'/><line x1='100' y1='2' x2='100' y2='198'/></g></svg>");
+  background-repeat: no-repeat;
+  background-size: contain;
+  opacity: 0.12;
+  pointer-events: none;
+  z-index: 0;
+}
+@media (max-width: 700px) {
+  .es-motif { width: 60vw; height: 60vw; right: 0; opacity: 0.08; }
+}
 
 .es-hero {
   position: relative;
@@ -1459,7 +1481,7 @@ body.enviroshake-page .es-section {
   align-items: center;
 }
 .es-split.reverse .es-split-media { order: 2; }
-.es-split.es-split-wide { grid-template-columns: 1.3fr 1fr; }
+.es-split.es-split-wide { grid-template-columns: 1.7fr 1fr; }
 .es-split-media { position: relative; }
 .es-frame {
   position: relative;
