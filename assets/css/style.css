@@ -61,13 +61,15 @@
    underneath the fixed header */
 /* base size bumped ~6% (16px -> 17px) for easier reading — scales every
    rem-based measurement on the site along with it */
-html { scroll-behavior: smooth; scroll-padding-top: 96px; background: var(--paper); font-size: 106.25%; }
-/* the EnviroShake page is dark end-to-end; without this, overscroll/bounce
-   at the top or bottom reveals the site-wide light html background instead
-   of matching the page, which reads as the dark overlay "not covering"
-   the page. Belt-and-suspenders with the inline style on <html> in
-   enviroshake.html, which also covers the first paint before this loads. */
-html:has(body.enviroshake-page) { background: #061510; }
+/* html itself is left without a background-color on purpose: per the CSS
+   canvas-background rules, an html with no specified background lets the
+   body's own background paint the canvas (including the overscroll/bounce
+   area above/below the document) instead. That's more reliable than
+   swapping html's color with :has(), which some browsers don't support and
+   which left the light default showing through in the bounce area on the
+   dark EnviroShake pages. Belt-and-suspenders with the inline style on
+   <html> in enviroshake.html, which also covers the first paint. */
+html { scroll-behavior: smooth; scroll-padding-top: 96px; font-size: 106.25%; }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   *, *::before, *::after {
@@ -1203,16 +1205,21 @@ body.enviroshake-page .es-section {
   0% { background-position: 0% 0%; }
   100% { background-position: 10% 8%; }
 }
+/* faint, scalloped shake/shingle courses rather than flat noise — the same
+   tile repeated at two different scales/offsets so the overlap breaks up
+   the perfect regularity a single tile would read as a printed pattern */
 .es-depth::after {
   content: "";
   position: absolute;
   inset: 0;
   z-index: 0;
   pointer-events: none;
-  opacity: 0.07;
-  mix-blend-mode: overlay;
-  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='120'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
-  background-size: 180px 180px;
+  opacity: 0.09;
+  background-image:
+    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='64' height='32'><path d='M-16,26 q16,-11 32,0 q16,11 32,0' fill='none' stroke='%233d8f66' stroke-width='0.55'/><path d='M0,10 q16,-11 32,0 q16,11 32,0' fill='none' stroke='%233d8f66' stroke-width='0.55'/></svg>"),
+    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='64' height='32'><path d='M-16,26 q16,-11 32,0 q16,11 32,0' fill='none' stroke='%233d8f66' stroke-width='0.55'/><path d='M0,10 q16,-11 32,0 q16,11 32,0' fill='none' stroke='%233d8f66' stroke-width='0.55'/></svg>");
+  background-size: 96px 48px, 132px 66px;
+  background-position: 0 0, 24px 15px;
 }
 .es-depth > * { position: relative; z-index: 1; }
 
@@ -1258,9 +1265,9 @@ body.enviroshake-page .es-section {
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(ellipse 70% 60% at 15% 15%, rgba(28,81,56,0.14), transparent 55%),
-    linear-gradient(180deg, rgba(6,21,16,0.32) 0%, rgba(6,21,16,0.4) 40%, rgba(6,21,16,0.58) 100%),
-    linear-gradient(90deg, rgba(6,21,16,0.42) 0%, rgba(6,21,16,0.18) 50%, rgba(6,21,16,0.38) 100%);
+    radial-gradient(ellipse 70% 60% at 15% 15%, rgba(28,81,56,0.12), transparent 55%),
+    linear-gradient(180deg, rgba(6,21,16,0.26) 0%, rgba(6,21,16,0.32) 40%, rgba(6,21,16,0.48) 100%),
+    linear-gradient(90deg, rgba(6,21,16,0.34) 0%, rgba(6,21,16,0.13) 50%, rgba(6,21,16,0.3) 100%);
 }
 .es-hero::before {
   content: "";
