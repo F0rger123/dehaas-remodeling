@@ -1205,9 +1205,9 @@ body.enviroshake-page .es-section {
   0% { background-position: 0% 0%; }
   100% { background-position: 10% 8%; }
 }
-/* faint, scalloped shake/shingle courses rather than flat noise — the same
-   tile repeated at two different scales/offsets so the overlap breaks up
-   the perfect regularity a single tile would read as a printed pattern */
+/* faint rows of overlapping shake/shingle tabs, brick-coursed like a real
+   roof — the same tile repeated at two scales/offsets so the overlap
+   breaks up the perfect regularity a single tile would read as a stamp */
 .es-depth::after {
   content: "";
   position: absolute;
@@ -1216,33 +1216,12 @@ body.enviroshake-page .es-section {
   pointer-events: none;
   opacity: 0.09;
   background-image:
-    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='64' height='32'><path d='M-16,26 q16,-11 32,0 q16,11 32,0' fill='none' stroke='%233d8f66' stroke-width='0.55'/><path d='M0,10 q16,-11 32,0 q16,11 32,0' fill='none' stroke='%233d8f66' stroke-width='0.55'/></svg>"),
-    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='64' height='32'><path d='M-16,26 q16,-11 32,0 q16,11 32,0' fill='none' stroke='%233d8f66' stroke-width='0.55'/><path d='M0,10 q16,-11 32,0 q16,11 32,0' fill='none' stroke='%233d8f66' stroke-width='0.55'/></svg>");
-  background-size: 96px 48px, 132px 66px;
-  background-position: 0 0, 24px 15px;
+    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='48' height='32'><g fill='none' stroke='%233d8f66' stroke-width='0.6'><rect x='-4' y='1' width='20' height='13' rx='3'/><rect x='20' y='1' width='20' height='13' rx='3'/><rect x='44' y='1' width='20' height='13' rx='3'/><rect x='8' y='17' width='20' height='13' rx='3'/><rect x='32' y='17' width='20' height='13' rx='3'/><rect x='-16' y='17' width='20' height='13' rx='3'/></g></svg>"),
+    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='48' height='32'><g fill='none' stroke='%233d8f66' stroke-width='0.6'><rect x='-4' y='1' width='20' height='13' rx='3'/><rect x='20' y='1' width='20' height='13' rx='3'/><rect x='44' y='1' width='20' height='13' rx='3'/><rect x='8' y='17' width='20' height='13' rx='3'/><rect x='32' y='17' width='20' height='13' rx='3'/><rect x='-16' y='17' width='20' height='13' rx='3'/></g></svg>");
+  background-size: 72px 48px, 100px 67px;
+  background-position: 0 0, 30px 18px;
 }
 .es-depth > * { position: relative; z-index: 1; }
-
-/* a large, faint ring motif for text-heavy sections with open space
-   (e.g. Why Choose, FAQ) — sits behind content, hidden wherever a
-   card or list item's own opaque background covers it */
-.es-motif {
-  position: absolute;
-  top: 50%;
-  right: 2%;
-  width: min(40vw, 540px);
-  height: min(40vw, 540px);
-  transform: translateY(-50%);
-  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'><g fill='none' stroke='%233d8f66' stroke-width='0.6'><circle cx='100' cy='100' r='38'/><circle cx='100' cy='100' r='68'/><circle cx='100' cy='100' r='98'/><line x1='2' y1='100' x2='198' y2='100'/><line x1='100' y1='2' x2='100' y2='198'/></g></svg>");
-  background-repeat: no-repeat;
-  background-size: contain;
-  opacity: 0.12;
-  pointer-events: none;
-  z-index: 0;
-}
-@media (max-width: 700px) {
-  .es-motif { width: 60vw; height: 60vw; right: 0; opacity: 0.08; }
-}
 
 .es-hero {
   position: relative;
@@ -1265,6 +1244,7 @@ body.enviroshake-page .es-section {
   position: absolute;
   inset: 0;
   background:
+    linear-gradient(180deg, rgba(6,21,16,0.62) 0%, rgba(6,21,16,0.22) 9%, transparent 16%),
     radial-gradient(ellipse 70% 60% at 15% 15%, rgba(28,81,56,0.12), transparent 55%),
     linear-gradient(180deg, rgba(6,21,16,0.26) 0%, rgba(6,21,16,0.32) 40%, rgba(6,21,16,0.48) 100%),
     linear-gradient(90deg, rgba(6,21,16,0.34) 0%, rgba(6,21,16,0.13) 50%, rgba(6,21,16,0.3) 100%);
