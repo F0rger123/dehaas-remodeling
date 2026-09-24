@@ -449,13 +449,36 @@
   var links = document.querySelectorAll("a[data-packet-download]");
   if (!links.length || !window.claude || !window.claude.use) return;
 
+  // The artifact preview sandbox can silently refuse a plain <a download>
+  // click and a fetch() of a sibling file alike, so this loads the packet
+  // as a same-origin <script> instead. If that channel is *also* blocked
+  // (it doesn't always fire onerror), a short timeout catches the hang.
+  // Whatever fails, the final fallback below opens the real PDF in a new
+  // top-level tab, which isn't bound by the iframe's sandbox — so the
+  // click always does something visible instead of silently no-op'ing.
   function loadPacketData() {
     if (window.__ENVIROSHAKE_PACKET_B64__) return Promise.resolve();
     return new Promise(function (resolve, reject) {
+      var settled = false;
+      var timer = setTimeout(function () {
+        if (settled) return;
+        settled = true;
+        reject(new Error("packet data timed out"));
+      }, 4000);
       var s = document.createElement("script");
       s.src = "assets/js/enviroshake-packet-data.js";
-      s.onload = function () { resolve(); };
-      s.onerror = function () { reject(new Error("packet data failed to load")); };
+      s.onload = function () {
+        if (settled) return;
+        settled = true;
+        clearTimeout(timer);
+        window.__ENVIROSHAKE_PACKET_B64__ ? resolve() : reject(new Error("packet data script loaded empty"));
+      };
+      s.onerror = function () {
+        if (settled) return;
+        settled = true;
+        clearTimeout(timer);
+        reject(new Error("packet data failed to load"));
+      };
       document.head.appendChild(s);
     });
   }
@@ -470,13 +493,15 @@
   links.forEach(function (link) {
     link.addEventListener("click", function (e) {
       e.preventDefault();
+      var pdfHref = link.getAttribute("href");
+      var fallback = function () { window.open(pdfHref, "_blank"); };
       window.claude.use("downloads").then(function (downloads) {
-        if (!downloads) return;
+        if (!downloads) return fallback();
         return loadPacketData().then(function () {
           var blob = base64ToBlob(window.__ENVIROSHAKE_PACKET_B64__);
           return downloads.save({ filename: "enviroshake-informational-packet.pdf", data: blob });
-        });
-      }).catch(function () {});
+        }).catch(fallback);
+      }).catch(fallback);
     });
   });
 })();
