@@ -1205,21 +1205,18 @@ body.enviroshake-page .es-section {
   0% { background-position: 0% 0%; }
   100% { background-position: 10% 8%; }
 }
-/* faint rows of overlapping shake/shingle tabs, brick-coursed like a real
-   roof — the same tile repeated at two scales/offsets so the overlap
-   breaks up the perfect regularity a single tile would read as a stamp */
+/* a restrained architectural line pattern — horizontal course lines with
+   staggered tab-joint ticks, like a technical drawing of shingle coursing
+   rather than a printed motif. Kept intentionally faint. */
 .es-depth::after {
   content: "";
   position: absolute;
   inset: 0;
   z-index: 0;
   pointer-events: none;
-  opacity: 0.09;
-  background-image:
-    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='48' height='32'><g fill='none' stroke='%233d8f66' stroke-width='0.6'><rect x='-4' y='1' width='20' height='13' rx='3'/><rect x='20' y='1' width='20' height='13' rx='3'/><rect x='44' y='1' width='20' height='13' rx='3'/><rect x='8' y='17' width='20' height='13' rx='3'/><rect x='32' y='17' width='20' height='13' rx='3'/><rect x='-16' y='17' width='20' height='13' rx='3'/></g></svg>"),
-    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='48' height='32'><g fill='none' stroke='%233d8f66' stroke-width='0.6'><rect x='-4' y='1' width='20' height='13' rx='3'/><rect x='20' y='1' width='20' height='13' rx='3'/><rect x='44' y='1' width='20' height='13' rx='3'/><rect x='8' y='17' width='20' height='13' rx='3'/><rect x='32' y='17' width='20' height='13' rx='3'/><rect x='-16' y='17' width='20' height='13' rx='3'/></g></svg>");
-  background-size: 72px 48px, 100px 67px;
-  background-position: 0 0, 30px 18px;
+  opacity: 0.05;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='40' height='20'><g stroke='%233d8f66' stroke-width='0.5' fill='none'><line x1='0' y1='0' x2='40' y2='0'/><line x1='0' y1='10' x2='40' y2='10'/><line x1='0' y1='0' x2='0' y2='10'/><line x1='20' y1='0' x2='20' y2='10'/><line x1='10' y1='10' x2='10' y2='20'/><line x1='30' y1='10' x2='30' y2='20'/></g></svg>");
+  background-size: 88px 44px;
 }
 .es-depth > * { position: relative; z-index: 1; }
 
@@ -1239,15 +1236,18 @@ body.enviroshake-page .es-section {
 .es-hero-media picture, .es-hero-media img {
   width: 100%; height: 100%; display: block; object-fit: cover; object-position: center 40%;
 }
+/* a lighter-toned green accent glow used to sit here for depth, but at
+   low opacity over a dark photo it read as a mismatched bright patch near
+   the logo rather than added depth — plain, even darkening covers evenly
+   without creating a spot that looks uncovered */
 .es-hero-media::after {
   content: "";
   position: absolute;
   inset: 0;
   background:
-    linear-gradient(180deg, rgba(6,21,16,0.62) 0%, rgba(6,21,16,0.22) 9%, transparent 16%),
-    radial-gradient(ellipse 70% 60% at 15% 15%, rgba(28,81,56,0.12), transparent 55%),
-    linear-gradient(180deg, rgba(6,21,16,0.26) 0%, rgba(6,21,16,0.32) 40%, rgba(6,21,16,0.48) 100%),
-    linear-gradient(90deg, rgba(6,21,16,0.34) 0%, rgba(6,21,16,0.13) 50%, rgba(6,21,16,0.3) 100%);
+    linear-gradient(180deg, rgba(6,21,16,0.62) 0%, rgba(6,21,16,0.28) 9%, transparent 16%),
+    linear-gradient(180deg, rgba(6,21,16,0.36) 0%, rgba(6,21,16,0.4) 40%, rgba(6,21,16,0.54) 100%),
+    linear-gradient(90deg, rgba(6,21,16,0.38) 0%, rgba(6,21,16,0.22) 50%, rgba(6,21,16,0.34) 100%);
 }
 .es-hero::before {
   content: "";
