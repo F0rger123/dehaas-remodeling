@@ -1268,17 +1268,6 @@ body.enviroshake-page .es-section {
   z-index: 2;
   padding-block: clamp(6rem, 14vh, 9rem) clamp(3.5rem, 8vh, 5rem);
 }
-.es-hero-inner::before {
-  content: "";
-  position: absolute;
-  z-index: -1;
-  left: -6vw;
-  right: -6vw;
-  top: -3rem;
-  bottom: -2rem;
-  background: radial-gradient(ellipse 80% 90% at 18% 45%, rgba(6,21,16,0.68), rgba(6,21,16,0.3) 55%, transparent 78%);
-  pointer-events: none;
-}
 .es-badge {
   display: inline-flex;
   align-items: center;
