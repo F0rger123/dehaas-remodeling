@@ -177,6 +177,10 @@
         </div>
         <div class="estimate-form">
           <form id="estimate-form" novalidate>
+            <!-- FormSubmit.co config — see README "Request-Estimate Leads" for setup -->
+            <input type="hidden" name="_subject" value="New estimate request — DeHaas Building and Remodeling" />
+            <input type="hidden" name="_template" value="table" />
+            <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off" aria-hidden="true" />
             <div class="field-row">
               <div class="field">
                 <label for="name">Full name</label>
@@ -220,7 +224,10 @@
             <button class="btn btn-primary btn-block btn-lg" type="submit">Request My Free Estimate</button>
             <p class="form-note">We'll follow up to schedule an on-site walkthrough. No obligation, no pressure.</p>
             <div class="form-success" role="status">
-              <strong>Thanks &mdash; that's drafted.</strong> Your default mail app should have opened with the details filled in; send it and we'll be in touch to schedule a walkthrough.
+              <strong>Thanks &mdash; request sent.</strong> We'll follow up to schedule an on-site walkthrough.
+            </div>
+            <div class="form-error" role="alert">
+              <strong>Something went wrong.</strong> Please call or try again in a moment &mdash; your details weren't lost, just not sent yet.
             </div>
           </form>
         </div>

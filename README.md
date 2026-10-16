@@ -19,14 +19,17 @@ static HTML/CSS/JS site (no build step, no framework, no dependencies).
 ## What isn't wired up yet (do this before launch)
 
 The live site never publishes a business phone number or email — it only
-funnels visitors through a "Request Estimate" form. This redesign follows
-the same pattern, but the form currently has **no backend**:
+funnels visitors through a "Request Estimate" form.
 
-1. Open `assets/js/main.js` and find `ESTIMATE_RECIPIENT` near the bottom.
-   Set it to the business's real inbox address, **or** replace the submit
-   handler with a hosted form service (Formspree, Netlify Forms, Basin,
-   etc.) so submissions land somewhere reliable instead of depending on the
-   visitor's own email client.
+1. **Request-Estimate leads.** The form submits to
+   [FormSubmit.co](https://formsubmit.co) — no account or backend needed,
+   submissions land straight in an inbox. Open `assets/js/main.js`, find
+   `LEAD_EMAIL` near the bottom, and set it to the business's real inbox
+   address. **Then submit the live form once yourself** — FormSubmit emails
+   that address a one-time "Activate Form" link, and no leads deliver until
+   someone clicks it. Spam is filtered via a hidden honeypot field; if real
+   spam gets through, FormSubmit's dashboard (free, sign in with that same
+   email) adds reCAPTCHA.
 2. If/when a real business phone number exists, add it to the footer and
    `estimate.html`'s info panel.
 3. Swap the placeholder `<title>`/meta description domain references if the

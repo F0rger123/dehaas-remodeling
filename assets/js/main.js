@@ -200,34 +200,39 @@
     }
   });
 
-  /* ---------------- estimate form (static hand-off) ----------------
-     No backend is wired up yet. Set ESTIMATE_RECIPIENT to the business's
-     real inbox (or swap this handler for a form service such as
-     Formspree / Netlify Forms) before this site goes live. Until then,
-     submitting opens the visitor's email client with the request
-     pre-filled so it still reaches a human. */
-  const ESTIMATE_RECIPIENT = "";
+  /* ---------------- estimate form (FormSubmit.co) ----------------
+     Submits straight to an inbox via https://formsubmit.co — no backend,
+     no account required. Set LEAD_EMAIL to the business's real inbox
+     before this site goes live; see README "Request-Estimate Leads" for
+     the one-time activation-email step FormSubmit requires per address. */
+  const LEAD_EMAIL = "SET-BUSINESS-EMAIL-HERE@example.com";
   const form = document.querySelector("#estimate-form");
   if (form) {
     form.addEventListener("submit", (e) => {
       e.preventDefault();
       if (!form.reportValidity()) return;
       const success = document.querySelector(".form-success");
+      const error = document.querySelector(".form-error");
+      const submitBtn = form.querySelector("button[type=submit]");
       const data = new FormData(form);
-      const subject = encodeURIComponent(`Estimate request — ${data.get("name") || "New lead"}`);
-      const bodyLines = [
-        `Name: ${data.get("name") || ""}`,
-        `Phone: ${data.get("phone") || ""}`,
-        `Email: ${data.get("email") || ""}`,
-        `Project type: ${data.get("project") || ""}`,
-        `Address: ${data.get("address") || ""}`,
-        "",
-        `Details: ${data.get("message") || ""}`,
-      ];
-      const body = encodeURIComponent(bodyLines.join("\n"));
-      window.location.href = `mailto:${ESTIMATE_RECIPIENT}?subject=${subject}&body=${body}`;
-      if (success) success.classList.add("is-visible");
-      form.reset();
+      if (error) error.classList.remove("is-visible");
+      if (submitBtn) submitBtn.disabled = true;
+      fetch(`https://formsubmit.co/ajax/${LEAD_EMAIL}`, {
+        method: "POST",
+        headers: { Accept: "application/json" },
+        body: data,
+      })
+        .then((res) => {
+          if (!res.ok) throw new Error("FormSubmit request failed");
+          if (success) success.classList.add("is-visible");
+          form.reset();
+        })
+        .catch(() => {
+          if (error) error.classList.add("is-visible");
+        })
+        .finally(() => {
+          if (submitBtn) submitBtn.disabled = false;
+        });
     });
   }
 })();

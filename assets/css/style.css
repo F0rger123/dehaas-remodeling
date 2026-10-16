@@ -921,6 +921,17 @@ section { position: relative; padding-block: clamp(4.5rem, 9vh, 7.5rem); }
   font-size: 0.92rem;
 }
 .form-success.is-visible { display: block; animation: pop-in var(--dur-med) var(--ease-spring); }
+.form-error {
+  display: none;
+  border-radius: var(--radius-sm);
+  background: var(--red-100);
+  border: 1px solid rgba(164,35,31,0.25);
+  color: var(--red-700);
+  padding: 1.2rem 1.3rem;
+  margin-top: 1.2rem;
+  font-size: 0.92rem;
+}
+.form-error.is-visible { display: block; animation: pop-in var(--dur-med) var(--ease-spring); }
 @keyframes pop-in { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
 
 /* ------------------------------------ footer --------------------------------- */
